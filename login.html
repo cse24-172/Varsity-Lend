@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b50"><title>Student Login | Varsity Lend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101943;--blue:#263fae;--blue2:#4260d5;--yellow:#ffd94f;--ink:#17203b;--muted:#737b91;--pale:#f4f6fc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff}a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{height:78px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #edf0f6}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,Arial,sans-serif;font-weight:800;letter-spacing:-.5px;color:var(--navy);font-size:18px}
+.brand-mark{height:43px;width:43px;border-radius:14px;background:linear-gradient(145deg,#4666e1,#101943);display:grid;place-items:center;color:#fff;font-size:19px}
+.brand small{display:block;font:700 9px Arial,sans-serif;letter-spacing:2px;color:#8991a8;margin-top:2px}
+.navlinks{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.navlinks a{font-size:13px;font-weight:800;padding:11px 15px;border-radius:30px;color:var(--navy)}
+.navlinks a.active,.navlinks a.primary{background:var(--blue);color:white}
+.navlinks a:hover{background:#eef1ff;color:var(--blue)}
+main{min-height:calc(100vh - 150px);background:linear-gradient(180deg,#f7f8fd 0%,#fff 360px);padding:54px 0 70px}
+.page-heading{text-align:center;margin:0 auto 28px;max-width:650px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
+h1{font:800 clamp(32px,5vw,46px)/1.12 Manrope,Arial,sans-serif;letter-spacing:-1.5px;margin:12px 0;color:var(--navy)}
+.page-heading p{font-size:15px;line-height:1.7;color:var(--muted);margin:0}
+.panel{background:#fff;border:1px solid #e8ebf4;border-radius:23px;padding:30px;box-shadow:0 15px 45px #1b2c6710;max-width:620px;margin:auto}
+.panel.wide{max-width:900px}
+.panel h2{font:800 22px Manrope,Arial,sans-serif;margin:0 0 7px;color:var(--navy)}
+.sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:grid;gap:7px}.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:800;color:#48516a}
+input,select,textarea{width:100%;border:1px solid #dfe3ed;border-radius:11px;padding:13px;font:14px Arial,sans-serif;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:0;border-color:#6179dc;box-shadow:0 0 0 3px #263fae12}
+textarea{min-height:90px;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:30px;padding:14px 22px;font-weight:800;font-size:14px;cursor:pointer}
+.btn-yellow{background:var(--yellow);color:#1b2341}.btn-blue{background:var(--blue);color:#fff}.btn-outline{border:1px solid #dce2f6;color:var(--blue);background:#fff}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:11px;line-height:1.6;color:#858da1;margin:16px 0 0}
+footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.foot strong{color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.tile{border:1px solid #e8ebf4;border-radius:17px;padding:20px;background:#fff}
+.tile small{display:block;color:var(--muted);font-size:12px;margin-bottom:9px}.tile strong{font:800 19px Manrope,Arial,sans-serif;color:var(--navy)}
+@media(max-width:650px){header{height:auto;padding:13px 0}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%;gap:4px}.navlinks a{padding:9px 10px;font-size:12px}main{padding:38px 0 55px}.panel{padding:22px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.tiles{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><nav class="navlinks"><a class="" href="index.html">Home</a><a class="primary" href="register.html">Create account</a><a class="active " href="login.html">Student login</a></nav></div></header>
+<main><div class="wrap"><div class="page-heading"><div class="kicker">STUDENT ACCESS</div><h1>Welcome back, student.</h1><p>Sign in to access your Varsity Lend student area.</p></div>
+<section class="panel"><h2>Welcome back</h2><p class="sub">Sign in to continue to your student area.</p>
+<form onsubmit="event.preventDefault();alert('Sign-in will be activated when secure account services are connected.');">
+<div class="fields"><div class="field full"><label for="email">Email address</label><input id="email" type="email" autocomplete="username" required placeholder="Enter your email"></div>
+<div class="field full"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Enter your password"></div></div>
+<div class="btn-row"><button class="btn btn-yellow" type="submit">Sign in</button><a class="btn btn-outline" href="register.html">Create an account</a></div>
+</form></section></div></main>
+<footer><div class="wrap foot"><span><strong>VARSITY LEND</strong> · Quick Student Funding</span><span>Botswana</span><span>© <span id="year"></span> Varsity Lend</span></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body></html>

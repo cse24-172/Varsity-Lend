@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Varsity Lend — student funding enquiries and financial support for your academic journey in Botswana.">
+  <meta name="theme-color" content="#142b86">
+  <title>Varsity Lend | Student Funding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #172f91;
+      --blue-dark: #0b174b;
+      --blue-deep: #091334;
+      --blue-light: #eaf0ff;
+      --yellow: #ffd84d;
+      --ink: #172033;
+      --muted: #667085;
+      --paper: #f7f8fc;
+      --white: #fff;
+      --line: #e7eaf2;
+      --green: #20b66b;
+      --radius: 22px;
+      --shadow: 0 18px 50px rgba(13, 31, 83, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "DM Sans", sans-serif; color: var(--ink); background: var(--white); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1140px, calc(100% - 40px)); margin: auto; }
+    .topline { background: var(--blue-dark); color: #dbe4ff; font-size: 13px; padding: 9px 0; }
+    .topline .container { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(231,234,242,.9); }
+    .nav { min-height: 78px; display:flex; align-items:center; justify-content:space-between; gap:22px; }
+    .brand { display:flex; align-items:center; gap:11px; font-family: Manrope, sans-serif; font-weight:800; letter-spacing:-.7px; color:var(--blue-dark); font-size:20px; }
+    .brand-mark { width:43px; height:43px; border-radius:14px; display:grid; place-items:center; color:#fff; background:linear-gradient(145deg,#294fd0,#08184e); box-shadow:0 7px 18px #172f9133; font-size:22px; }
+    .brand small { display:block; font:600 9px "DM Sans",sans-serif; letter-spacing:2px; color:#7782a2; margin-top:1px; }
+    .nav-links { display:flex; align-items:center; gap:28px; color:#47516b; font-size:14px; font-weight:600; }
+    .nav-links a:hover { color:var(--blue); }
+    .btn { border:0; display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:999px; padding:14px 22px; font-weight:800; cursor:pointer; transition:.2s ease; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { background:var(--yellow); color:#17203a; box-shadow:0 8px 20px #ffd84d55; }
+    .btn-blue { background:var(--blue); color:#fff; box-shadow:0 10px 24px #172f9133; }
+    .btn-outline { border:1px solid #d7def0; color:var(--blue); background:#fff; }
+    .menu-btn { display:none; border:0; background:var(--blue-light); color:var(--blue); border-radius:12px; padding:10px 13px; font-size:20px; }
+    .hero { overflow:hidden; position:relative; color:#fff; background:radial-gradient(circle at 80% 15%,#2c4bc0 0,transparent 32%),linear-gradient(115deg,#09143c 0%,#142d85 58%,#1d3ca7 100%); }
+    .hero:before { content:""; position:absolute; width:440px;height:440px;border:1px solid #ffffff18;border-radius:50%;right:-110px;bottom:-240px;box-shadow:0 0 0 45px #ffffff08,0 0 0 90px #ffffff06; }
+    .hero-grid { position:relative; display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:45px; padding:82px 0 90px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; color:#ffe27c; font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:1.7px; }
+    .eyebrow:before { content:""; width:26px; height:2px; background:var(--yellow); }
+    h1,h2,h3 { font-family:Manrope,sans-serif; letter-spacing:-1.2px; }
+    h1 { font-size:clamp(42px,5.3vw,66px); line-height:1.06; margin:19px 0 20px; max-width:650px; }
+    .hero p { color:#d7e0ff; line-height:1.75; font-size:17px; max-width:540px; margin:0 0 29px; }
+    .hero-actions { display:flex; gap:13px; flex-wrap:wrap; }
+    .hero-note { display:flex; align-items:center; gap:10px; margin-top:26px; color:#c7d2ff; font-size:12px; }
+    .hero-note span { width:7px;height:7px;border-radius:50%;background:#62e5a1; }
+    .hero-card { background:#fff; color:var(--ink); border-radius:28px; padding:28px; box-shadow:0 28px 70px #030b2e66; transform:rotate(1deg); max-width:420px; justify-self:end; width:100%; }
+    .card-top { display:flex; justify-content:space-between; align-items:center; color:#68728b; font-size:12px; font-weight:700; }
+    .mini-logo { display:flex; align-items:center; gap:8px; color:var(--blue); font-weight:800; font-size:13px; }
+    .mini-logo b { width:29px;height:29px;border-radius:9px;background:var(--blue);color:#fff;display:grid;place-items:center; }
+    .offer { margin:25px 0 18px; padding:23px; border-radius:19px; background:linear-gradient(135deg,#eef2ff,#f8f9ff); }
+    .offer-label { font-size:12px; color:#5e6884; font-weight:700; }
+    .offer-amount { font:800 47px Manrope,sans-serif; color:var(--blue); letter-spacing:-2px; margin:3px 0; }
+    .offer-sub { font-size:12px; color:#69738c; }
+    .offer-badge { display:inline-block; background:#fff2bd; color:#6c5200; border-radius:999px; padding:7px 11px; font-size:11px; font-weight:800; margin-top:15px; }
+    .card-foot { display:flex; justify-content:space-between; align-items:center; gap:10px; color:#7a8297; font-size:11px; }
+    .card-foot strong { color:#1b9a5a; font-size:12px; }
+    .trust-strip { background:#fff; border-bottom:1px solid var(--line); }
+    .trust-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:22px 0; }
+    .trust-item { display:flex; align-items:center; justify-content:center; gap:11px; color:#4b5670; font-size:13px; font-weight:700; }
+    .trust-icon { width:37px;height:37px;border-radius:12px;background:var(--blue-light);color:var(--blue);display:grid;place-items:center;font-size:17px; }
+    section { padding:84px 0; }
+    .section-head { text-align:center; max-width:650px; margin:0 auto 42px; }
+    .section-kicker { color:var(--blue); text-transform:uppercase; letter-spacing:1.8px; font-size:11px; font-weight:800; }
+    h2 { font-size:clamp(30px,4vw,43px); line-height:1.15; margin:12px 0 14px; color:#111b39; }
+    .section-head p { color:var(--muted); line-height:1.75; margin:0; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .feature { border:1px solid var(--line); border-radius:var(--radius); padding:27px; background:#fff; transition:.2s; }
+    .feature:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+    .feature-icon { width:49px;height:49px;border-radius:15px;background:#edf1ff;color:var(--blue);display:grid;place-items:center;font-size:22px; margin-bottom:20px; }
+    .feature h3 { margin:0 0 9px; font-size:18px; letter-spacing:-.4px; }
+    .feature p { color:var(--muted); font-size:14px; line-height:1.7; margin:0; }
+    .about { background:var(--paper); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:55px; }
+    .about-visual { min-height:370px; border-radius:28px; background:linear-gradient(145deg,#102365,#3154c9); position:relative; overflow:hidden; padding:35px; display:flex; align-items:flex-end; }
+    .about-visual:before,.about-visual:after { content:""; position:absolute; border:1px solid #ffffff2c; border-radius:50%; width:300px;height:300px;top:-120px;right:-80px; }
+    .about-visual:after { width:420px;height:420px;top:-175px;right:-140px; }
+    .visual-copy { position:relative; color:#fff; max-width:340px; }
+    .visual-copy .big-cap { font-size:72px; margin-bottom:18px; }
+    .visual-copy h3 { font-size:29px; margin:0 0 10px; }
+    .visual-copy p { color:#d8e1ff; line-height:1.7; margin:0; }
+    .about-copy .section-kicker { display:block; }
+    .about-copy h2 { text-align:left; }
+    .about-copy p { color:var(--muted); line-height:1.8; }
+    .check-list { list-style:none; padding:0; margin:24px 0 0; display:grid; gap:13px; }
+    .check-list li { display:flex; gap:11px; color:#34405b; font-size:14px; font-weight:600; }
+    .check-list b { color:#15985a; }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; counter-reset:step; }
+    .step { padding:27px; border:1px solid var(--line); border-radius:var(--radius); }
+    .step-no { width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:var(--blue);color:#fff;font-weight:800;margin-bottom:20px; }
+    .step h3 { margin:0 0 9px; font-size:18px; }
+    .step p { color:var(--muted);font-size:14px;line-height:1.7;margin:0; }
+    .apply { background:linear-gradient(180deg,#f7f8fc,#fff); }
+    .apply-wrap { display:grid; grid-template-columns:.8fr 1.2fr; gap:35px; align-items:start; }
+    .apply-intro { background:var(--blue-dark); color:#fff; border-radius:25px; padding:30px; position:sticky; top:105px; }
+    .apply-intro h2 { color:#fff; font-size:31px; }
+    .apply-intro p { color:#d1dbff; line-height:1.75; font-size:14px; }
+    .apply-intro .contact-line { margin-top:24px; padding-top:20px; border-top:1px solid #ffffff2b; font-size:13px; color:#d1dbff; }
+    .form-card { background:#fff; border:1px solid var(--line); border-radius:25px; padding:32px; box-shadow:var(--shadow); }
+    .form-card h3 { margin:0 0 7px; font-size:22px; }
+    .form-card>p { color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 24px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:17px; }
+    .field { display:grid; gap:8px; }
+    .field.full { grid-column:1/-1; }
+    label { color:#35405a; font-size:12px; font-weight:800; }
+    input,select,textarea { width:100%; border:1px solid #dfe4ef; border-radius:12px; padding:13px 14px; background:#fff; color:var(--ink); outline:none; transition:.2s; }
+    input:focus,select:focus,textarea:focus { border-color:#6079dc; box-shadow:0 0 0 3px #172f9114; }
+    textarea { min-height:95px; resize:vertical; }
+    .form-note { color:#788198; font-size:11px; line-height:1.6; margin:14px 0 18px; }
+    .form-card .btn { width:100%; }
+    .faq-list { max-width:800px; margin:auto; display:grid; gap:12px; }
+    details { border:1px solid var(--line); border-radius:15px; padding:18px 20px; background:#fff; }
+    summary { cursor:pointer; font-weight:800; color:#202b49; list-style:none; display:flex;justify-content:space-between;gap:15px; }
+    summary:after { content:"+"; color:var(--blue); font-size:20px; line-height:16px; }
+    details[open] summary:after { content:"−"; }
+    details p { color:var(--muted); line-height:1.7; font-size:14px; margin:14px 0 0; }
+    .cta-band { padding:0 0 84px; }
+    .cta-inner { border-radius:27px; background:linear-gradient(110deg,#13296f,#1c43b5); color:#fff; padding:38px 43px; display:flex; align-items:center; justify-content:space-between; gap:25px; }
+    .cta-inner h2 { color:#fff; margin:0 0 8px; font-size:30px; }
+    .cta-inner p { color:#d6dfff; margin:0; font-size:14px; }
+    footer { background:#081334; color:#fff; padding:48px 0 25px; }
+    .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:35px; padding-bottom:35px; }
+    footer .brand { color:#fff; }
+    footer .brand small { color:#9ba9d8; }
+    footer p,footer a { color:#aeb9df; font-size:13px; line-height:1.8; }
+    footer h4 { margin:0 0 15px; font-size:13px; }
+    .footer-links { display:grid; gap:8px; }
+    .copyright { border-top:1px solid #ffffff20; padding-top:20px; display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; color:#8795c2; font-size:11px; }
+    .disclaimer { max-width:850px; color:#8f9dc8; font-size:10px; line-height:1.7; margin-top:12px; }
+    .whatsapp-float { position:fixed; right:22px; bottom:22px; z-index:60; width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#20c66b;color:#fff;font-size:27px;box-shadow:0 12px 30px #0b6a3b55; }
+    .toast { position:fixed; left:50%; bottom:25px; transform:translate(-50%,20px); background:#10204e;color:#fff;padding:13px 18px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:100; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:850px) {
+      .nav-links { display:none; position:absolute; top:78px; left:0; right:0; padding:20px; background:#fff; border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch; gap:18px; }
+      .nav-links.open { display:flex; }
+      .nav-links .btn { width:100%; }
+      .menu-btn { display:block; }
+      .nav>.btn { display:none; }
+      .hero-grid { grid-template-columns:1fr; padding:65px 0; gap:40px; }
+      .hero-card { justify-self:start; transform:none; max-width:460px; }
+      .about-grid,.apply-wrap { grid-template-columns:1fr; }
+      .apply-intro { position:static; }
+    }
+    @media(max-width:600px) {
+      .container { width:min(100% - 30px,1140px); }
+      .topline .container { justify-content:center; text-align:center; }
+      .hero-grid { padding:55px 0 65px; }
+      h1 { font-size:43px; }
+      .hero p { font-size:15px; }
+      section { padding:65px 0; }
+      .trust-grid { grid-template-columns:1fr; gap:13px; padding:19px 0; }
+      .trust-item { justify-content:flex-start; }
+      .feature-grid,.steps-grid { grid-template-columns:1fr; }
+      .about-visual { min-height:300px; }
+      .form-card { padding:22px; }
+      .form-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .cta-inner { padding:28px 23px; flex-direction:column; align-items:flex-start; }
+      .footer-grid { grid-template-columns:1fr; gap:24px; }
+      .copyright { flex-direction:column; }
+      .whatsapp-float { right:15px; bottom:15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">
+    <div class="container"><span>Student-focused funding enquiries in Botswana</span><span>WhatsApp: +267 729 583 14</span></div>
+  </div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Varsity Lend home">
+        <span class="brand-mark">Vℒ</span>
+        <span>VARSITY LEND<small>STUDENT FUNDING</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Our service</a><a href="#how">How it works</a><a href="#faq">FAQs</a>
+        <a class="btn btn-blue" href="#apply">Enquire now</a>
+      </nav>
+      <a class="btn btn-primary" href="#apply">Enquire now ↗</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Reliable financial support</span>
+          <h1>Keep moving towards your <span style="color:#ffdf62">dreams.</span></h1>
+          <p>Varsity Lend provides student funding enquiries and support for your academic journey. Tell us what you need and our team can guide you through the next steps.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#apply">Start an enquiry <span>→</span></a>
+            <a class="btn btn-outline" href="https://wa.me/26772958314" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </div>
+          <div class="hero-note"><span></span> Enquiries are not approval or a guarantee of funding.</div>
+        </div>
+        <div class="hero-card">
+          <div class="card-top"><div class="mini-logo"><b>Vℒ</b> VARSITY LEND</div><span>STUDENT FUNDING</span></div>
+          <div class="offer">
+            <div class="offer-label">Advertised funding amount</div>
+            <div class="offer-amount">Up to P700</div>
+            <div class="offer-sub">As shown in the July–December 2026 promotion</div>
+            <div class="offer-badge">30% advertised interest promotion</div>
+          </div>
+          <div class="card-foot"><span>Ask us about current terms</span><strong>WhatsApp support ↗</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item"><span class="trust-icon">✦</span> Student-focused support</div>
+        <div class="trust-item"><span class="trust-icon">◷</span> Enquire at your convenience</div>
+        <div class="trust-item"><span class="trust-icon">☏</span> Direct WhatsApp contact</div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">What we do</span>
+          <h2>Support for your academic journey</h2>
+          <p>Getting information about funding should feel straightforward. Reach out to Varsity Lend to ask about available options and the application process.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon">🎓</div><h3>Student funding enquiries</h3><p>Share what you need support with and ask the team about the funding options currently available.</p></article>
+          <article class="feature"><div class="feature-icon">💬</div><h3>Direct communication</h3><p>Contact Varsity Lend through WhatsApp to ask questions and receive guidance from the business.</p></article>
+          <article class="feature"><div class="feature-icon">📋</div><h3>Application guidance</h3><p>Find out which requirements and documents apply before submitting a formal application.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <div class="visual-copy"><div class="big-cap">🎓</div><h3>Your goals matter.</h3><p>Reliable financial support for your academic journey.</p></div>
+        </div>
+        <div class="about-copy">
+          <span class="section-kicker">About Varsity Lend</span>
+          <h2>Helping students take the next step.</h2>
+          <p>Varsity Lend is a student-loan services provider with a focus on financial support for students. The business shares updates and enquiries through its WhatsApp channel.</p>
+          <p>Have a question about funding? Get in touch directly so the team can explain its current eligibility criteria, terms and process.</p>
+          <ul class="check-list"><li><b>✓</b> Student-focused communication</li><li><b>✓</b> A direct channel for enquiries</li><li><b>✓</b> Clear information before you apply</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">Getting started</span><h2>Three simple steps to make an enquiry</h2><p>This website helps you contact the team. The business will confirm its actual application and approval process.</p></div>
+        <div class="steps-grid">
+          <article class="step"><div class="step-no">01</div><h3>Tell us about your needs</h3><p>Complete the short enquiry form with your contact details and the amount you would like to ask about.</p></article>
+          <article class="step"><div class="step-no">02</div><h3>Continue on WhatsApp</h3><p>Your enquiry is prepared as a WhatsApp message for you to review and send to Varsity Lend.</p></article>
+          <article class="step"><div class="step-no">03</div><h3>Get the official details</h3><p>Ask the team to confirm eligibility, required documents, interest calculation, fees and repayment terms.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply" id="apply">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">Let's talk</span><h2>Make a student funding enquiry</h2><p>Fill in the details below. Your WhatsApp message will open so you can check it before sending.</p></div>
+        <div class="apply-wrap">
+          <aside class="apply-intro">
+            <span class="eyebrow">We're one message away</span>
+            <h2>Let's discuss your funding needs.</h2>
+            <p>Use the enquiry form or contact Varsity Lend directly. Please do not send passwords, PINs or sensitive banking details through this website.</p>
+            <div class="contact-line">WhatsApp<br><strong style="font-size:20px;color:#fff">+267 729 583 14</strong><br><br>WhatsApp channel<br><a href="https://wa.me/message/NCKYPKIQXXQ3E1" target="_blank" rel="noopener" style="color:#ffe27c">Follow Varsity Lend updates ↗</a></div>
+          </aside>
+          <form class="form-card" id="enquiryForm">
+            <h3>Enquiry details</h3>
+            <p>Only provide the information requested below. This is an enquiry, not a formal loan application.</p>
+            <div class="form-grid">
+              <div class="field"><label for="fullName">Your name *</label><input id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Naledi M." required></div>
+              <div class="field"><label for="phone">Your WhatsApp number *</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+267 ..." required></div>
+              <div class="field"><label for="institution">College / university</label><input id="institution" name="institution" placeholder="Name of institution"></div>
+              <div class="field"><label for="amount">Amount you want to enquire about</label><select id="amount" name="amount"><option value="">Choose an amount</option><option>P100</option><option>P200</option><option>P300</option><option>P400</option><option>P500</option><option>P600</option><option>P700</option><option>Other / not sure</option></select></div>
+              <div class="field full"><label for="purpose">What would the funding help you with?</label><textarea id="purpose" name="purpose" placeholder="Briefly tell us what you need help with (optional)"></textarea></div>
+            </div>
+            <p class="form-note">By continuing, you choose to open WhatsApp and send the details you have entered to Varsity Lend. Your message is not sent automatically. Do not include your Omang number, bank account details, card details or passwords.</p>
+            <button class="btn btn-blue" type="submit">Continue to WhatsApp ↗</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">Questions</span><h2>Frequently asked questions</h2><p>These answers explain what to confirm directly with Varsity Lend.</p></div>
+        <div class="faq-list">
+          <details><summary>How much funding can I enquire about?</summary><p>The supplied July–December 2026 advertisement shows funding of up to P700. Contact Varsity Lend to confirm the amount currently available and whether it applies to you.</p></details>
+          <details><summary>What is the interest rate?</summary><p>The supplied advertisement displays 30% interest. It does not explain whether this is a once-off, monthly or annual rate, or how it is calculated. Ask Varsity Lend for the full written cost of borrowing before accepting an offer.</p></details>
+          <details><summary>Who can apply?</summary><p>The exact eligibility criteria have not yet been confirmed. Contact the team to ask which students qualify and what proof of enrolment or other documents may be required.</p></details>
+          <details><summary>How long does approval take?</summary><p>No verified processing or approval timeframe has been provided. Ask the business directly. Submitting an enquiry does not guarantee approval.</p></details>
+          <details><summary>How do I contact Varsity Lend?</summary><p>WhatsApp the team on +267 729 583 14 or visit its WhatsApp channel using the link on this page.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-band">
+      <div class="container cta-inner">
+        <div><h2>Have a question? Let's talk.</h2><p>Contact Varsity Lend directly for current funding information.</p></div>
+        <a class="btn btn-primary" href="https://wa.me/26772958314" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div><a class="brand" href="#home"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><p>Reliable financial support for your academic journey.</p></div>
+        <div><h4>Explore</h4><div class="footer-links"><a href="#about">About us</a><a href="#services">Our service</a><a href="#how">How it works</a><a href="#faq">FAQs</a></div></div>
+        <div><h4>Get in touch</h4><div class="footer-links"><a href="https://wa.me/26772958314" target="_blank" rel="noopener">WhatsApp: +267 729 583 14</a><a href="https://wa.me/message/NCKYPKIQXXQ3E1" target="_blank" rel="noopener">WhatsApp channel</a></div></div>
+      </div>
+      <div class="copyright"><span>© <span id="year"></span> Varsity Lend. All rights reserved.</span><span>Student funding enquiries</span></div>
+      <p class="disclaimer">IMPORTANT: This is a demonstration website. The funding amount and 30% interest wording are reproduced from the supplied July–December 2026 advertisement and are not confirmation of current availability or complete loan terms. Before this site is published for public use, Varsity Lend must approve the content and confirm its legal business details, eligibility rules, fees, interest calculation, repayment terms, privacy practices and applicable regulatory requirements. No funding or approval is guaranteed.</p>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/26772958314" target="_blank" rel="noopener" aria-label="Chat with Varsity Lend on WhatsApp">✆</a>
+  <div class="toast" id="toast" role="status">Opening WhatsApp…</div>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('enquiryForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (!this.reportValidity()) return;
+      const data = new FormData(this);
+      const lines = [
+        'Hello Varsity Lend, I would like to make a student funding enquiry.',
+        '',
+        'Name: ' + (data.get('fullName') || ''),
+        'WhatsApp number: ' + (data.get('phone') || ''),
+        'Institution: ' + (data.get('institution') || 'Not provided'),
+        'Amount: ' + (data.get('amount') || 'Not specified'),
+        'Purpose: ' + (data.get('purpose') || 'Not specified'),
+        '',
+        'Please share the current eligibility criteria, full interest calculation, fees and repayment terms. Thank you.'
+      ];
+      document.getElementById('toast').classList.add('show');
+      const url = 'https://wa.me/26772958314?text=' + encodeURIComponent(lines.join('\n'));
+      window.open(url, '_blank', 'noopener');
+      setTimeout(() => document.getElementById('toast').classList.remove('show'), 2200);
+    });
+  </script>
+</body>
+</html>

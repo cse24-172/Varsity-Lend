@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b50">
+<title>Administrator Access | Varsity Lend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101943;--blue:#263fae;--yellow:#ffd94f;--ink:#17203b;--muted:#737b91}
+*{box-sizing:border-box}body{margin:0;font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#f7f8fd}a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{height:78px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #edf0f6}
+.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,Arial,sans-serif;font-weight:800;color:var(--navy);font-size:18px;letter-spacing:-.5px}
+.brand-mark{height:43px;width:43px;border-radius:14px;background:linear-gradient(145deg,#4666e1,#101943);display:grid;place-items:center;color:#fff;font-size:19px}
+.brand small{display:block;font:700 9px Arial,sans-serif;letter-spacing:2px;color:#8991a8;margin-top:2px}
+main{min-height:calc(100vh - 150px);padding:58px 0 70px;background:linear-gradient(180deg,#f1f3fc,#fff 420px)}
+.card{max-width:500px;margin:auto;background:#fff;border:1px solid #e8ebf4;border-radius:23px;padding:32px;box-shadow:0 15px 45px #1b2c6710}
+.kicker{text-align:center;font-size:11px;font-weight:800;letter-spacing:2px;color:var(--blue)}
+h1{text-align:center;font:800 30px/1.2 Manrope,Arial,sans-serif;color:var(--navy);margin:12px 0 9px}
+.intro{text-align:center;color:var(--muted);font-size:14px;line-height:1.65;margin:0 0 25px}
+.admin-label{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f1f4ff;border-radius:12px;margin-bottom:22px;color:var(--navy);font-size:12px;font-weight:700}
+.lock{width:32px;height:32px;border-radius:9px;background:#e1e8ff;display:grid;place-items:center;font-size:16px}
+.field{display:grid;gap:7px;margin:15px 0}label{font-size:12px;font-weight:800;color:#48516a}
+input{width:100%;border:1px solid #dfe3ed;border-radius:11px;padding:14px;font:14px Arial,sans-serif;color:var(--ink)}
+input:focus{outline:0;border-color:#6179dc;box-shadow:0 0 0 3px #263fae12}
+button{width:100%;border:0;border-radius:30px;padding:14px 22px;background:var(--yellow);color:#1b2341;font-weight:800;font-size:14px;cursor:pointer;margin-top:8px}
+.notice{font-size:11px;line-height:1.6;color:#858da1;margin:17px 0 0;text-align:center}
+.back{display:block;text-align:center;margin-top:22px;color:var(--blue);font-size:12px;font-weight:800}
+footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.foot strong{color:#fff}
+@media(max-width:600px){main{padding:38px 0 55px}.card{padding:23px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="index.html"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a></div></header>
+<main><div class="wrap">
+<section class="card">
+<div class="kicker">RESTRICTED ACCESS</div>
+<h1>Administrator sign in</h1>
+<p class="intro">Sign in to manage Varsity Lend student funding applications.</p>
+<div class="admin-label"><span class="lock">▣</span><span>Administrator access only</span></div>
+<form id="adminLoginForm">
+<div class="field"><label for="email">Administrator email</label><input id="email" type="email" autocomplete="username" required placeholder="Enter your admin email"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Enter your password"></div>
+<button type="submit">Sign in to admin area</button>
+</form>
+<p class="notice">Secure administrator sign-in is not active yet. This page is currently a visual setup only. Do not enter a real password until backend authentication has been connected.</p>
+<a class="back" href="index.html">← Back to Varsity Lend</a>
+</section>
+</div></main>
+<footer><div class="wrap foot"><span><strong>VARSITY LEND</strong> · Quick Student Funding</span><span>Botswana</span><span>© <span id="year"></span> Varsity Lend</span></div></footer>
+<script>
+document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("adminLoginForm").addEventListener("submit",function(event){event.preventDefault();alert("Administrator sign-in will work once secure backend authentication is connected. No login has been performed.");});
+</script>
+</body>
+</html>

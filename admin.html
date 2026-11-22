@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Varsity Lend</title>
+  <style>
+    :root{--navy:#102b5c;--blue:#174a91;--yellow:#f5c542;--bg:#f4f6fa;--ink:#17243a;--muted:#718096;--line:#e7ebf2;--white:#fff;--green:#16845b;--red:#c44848}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    button,input,select{font:inherit}.layout{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
+    aside{background:var(--navy);color:#fff;padding:25px 18px;display:flex;flex-direction:column}
+    .brand{font-weight:800;font-size:20px;letter-spacing:1px;padding:5px 10px}.brand small{display:block;color:#c7d5ec;font-size:10px;letter-spacing:2px;margin-top:5px}
+    .admin-tag{margin:28px 10px 16px;padding:12px;border:1px solid #45618a;border-radius:10px;background:#18396f;font-size:12px;color:#d9e4f5}
+    .admin-tag strong{display:block;color:white;font-size:14px;margin-bottom:4px}
+    nav{display:grid;gap:7px}nav a{color:#dce6f5;text-decoration:none;padding:12px 13px;border-radius:8px;font-size:14px;display:flex;gap:12px;align-items:center}nav a.active,nav a:hover{background:#234b86;color:#fff}nav a.active{border-left:3px solid var(--yellow)}
+    .sidebar-bottom{margin-top:auto;padding:18px 10px 4px;color:#aebed6;font-size:11px;line-height:1.6}
+    main{min-width:0}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+    .topbar h1{font-size:18px;margin:0}.top-right{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}.avatar{width:36px;height:36px;border-radius:50%;background:#e8effa;color:var(--navy);display:grid;place-items:center;font-weight:700}
+    .content{padding:30px 34px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:25px}.welcome h2{margin:0 0 7px;font-size:25px;color:var(--navy)}.welcome p{margin:0;color:var(--muted);font-size:14px}.date{font-size:12px;color:var(--muted);padding-top:7px}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:25px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:19px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:9px;background:#edf3fc;display:grid;place-items:center;color:var(--blue);font-size:17px}.stat strong{display:block;font-size:27px;color:var(--navy);margin:14px 0 5px}.stat small{font-size:11px;color:var(--muted)}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel-head{padding:19px 21px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line)}.panel-head h3{margin:0;font-size:16px;color:var(--navy)}.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px}
+    .tools{display:flex;gap:9px;align-items:center}.search{border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:205px;outline:none;font-size:12px}.filter{border:1px solid var(--line);border-radius:8px;padding:9px;background:white;color:#44536a;font-size:12px}
+    .table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:720px}th,td{text-align:left;padding:14px 20px;border-bottom:1px solid #edf0f5;font-size:12px}th{color:var(--muted);font-weight:600;background:#fbfcfe}td{color:#344258}.student{font-weight:700;color:var(--navy)}.sub{display:block;color:#8994a5;font-size:11px;margin-top:4px}
+    .status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}.pending{background:#fff4d6;color:#946600}.approved{background:#e3f5ed;color:#14734f}.rejected{background:#fdeaea;color:#a63838}
+    .action{border:0;background:#edf3fc;color:var(--blue);padding:7px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer}.empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;display:none}
+    .note{margin-top:18px;background:#fff9e7;border:1px solid #f3e3ad;border-radius:10px;padding:13px 15px;color:#765d16;font-size:12px;line-height:1.5}
+    .modal-backdrop{position:fixed;inset:0;background:#0c1b31a8;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal{background:white;border-radius:14px;padding:24px;width:min(430px,100%)}.modal h3{margin:0 0 15px;color:var(--navy)}.modal p{font-size:13px;color:#5c687a;line-height:1.6}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.btn{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700;font-size:12px}.btn-light{background:#edf1f7;color:#43516a}.btn-primary{background:var(--navy);color:white}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}aside{padding:14px 16px}.brand{font-size:17px}.admin-tag,.sidebar-bottom{display:none}nav{display:flex;overflow-x:auto;margin-top:13px}nav a{white-space:nowrap;padding:10px}.topbar{height:62px;padding:0 18px}.content{padding:22px 16px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{align-items:flex-start;flex-direction:column}.tools{width:100%}.search{flex:1;width:100%}}
+    @media(max-width:420px){.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:23px}.welcome h2{font-size:21px}.date{display:none}.top-right span{display:none}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">VARSITY LEND<small>STUDENT FUNDING</small></div>
+    <div class="admin-tag"><strong>Administrator</strong>Management workspace</div>
+    <nav>
+      <a class="active" href="#overview">▦ &nbsp; Overview</a>
+      <a href="#applications">▤ &nbsp; Applications</a>
+      <a href="#students" onclick="showStudents(event)">♙ &nbsp; Students</a>
+    </nav>
+    <div class="sidebar-bottom">VARSITY LEND ADMIN<br>Private management area<br><br>© 2026 Varsity Lend</div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <h1>Admin Dashboard</h1>
+      <div class="top-right"><span>Administrator</span><div class="avatar">A</div></div>
+    </header>
+    <section class="content" id="overview">
+      <div class="welcome"><div><h2>Welcome back, Admin</h2><p>Here's an overview of your student funding activity.</p></div><div class="date">Management overview</div></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-top">Total applications <span class="stat-icon">▤</span></div><strong id="totalCount">4</strong><small>Applications received</small></div>
+        <div class="stat"><div class="stat-top">Pending review <span class="stat-icon">◷</span></div><strong id="pendingCount">2</strong><small>Awaiting a decision</small></div>
+        <div class="stat"><div class="stat-top">Approved <span class="stat-icon">✓</span></div><strong id="approvedCount">1</strong><small>Marked as approved</small></div>
+        <div class="stat"><div class="stat-top">Rejected <span class="stat-icon">×</span></div><strong id="rejectedCount">1</strong><small>Marked as rejected</small></div>
+      </div>
+      <section class="panel" id="applications">
+        <div class="panel-head"><div><h3>Recent applications</h3><p>Review and update application statuses.</p></div>
+          <div class="tools"><input class="search" id="searchInput" type="search" placeholder="Search student or institution..." aria-label="Search applications"><select class="filter" id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select></div>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>INSTITUTION</th><th>AMOUNT</th><th>DATE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="applicationRows"></tbody></table></div>
+        <div class="empty" id="emptyState">No matching applications found.</div>
+      </section>
+      <div class="note"><strong>Demo dashboard:</strong> The records shown are sample data for layout testing only. Changes made here are temporary and will reset when the page is refreshed. No real student applications are stored or processed.</div>
+    </section>
+  </main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><h3 id="modalTitle">Application details</h3><div id="modalBody"></div><div class="modal-actions"><button class="btn btn-light" onclick="closeModal()">Close</button><button class="btn btn-primary" id="approveBtn">Approve</button><button class="btn btn-primary" id="rejectBtn" style="background:#a63838">Reject</button></div></div>
+</div>
+<script>
+  const applications = [
+    {id:1,name:"Kabelo M.",email:"kabelo@example.com",institution:"University of Botswana",amount:5000,date:"22 Nov 2026",status:"Pending"},
+    {id:2,name:"Boitumelo K.",email:"boitumelo@example.com",institution:"Botswana Accountancy College",amount:3500,date:"21 Nov 2026",status:"Pending"},
+    {id:3,name:"Neo T.",email:"neo@example.com",institution:"Limkokwing University",amount:4200,date:"19 Nov 2026",status:"Approved"},
+    {id:4,name:"Thato R.",email:"thato@example.com",institution:"Botho University",amount:2500,date:"18 Nov 2026",status:"Rejected"}
+  ];
+  let selectedId = null;
+  const money = n => "P" + n.toLocaleString("en-BW");
+  function render(){
+    const query=document.getElementById("searchInput").value.toLowerCase();
+    const filter=document.getElementById("statusFilter").value;
+    const rows=applications.filter(a=>(filter==="all"||a.status===filter)&&(`${a.name} ${a.email} ${a.institution}`).toLowerCase().includes(query));
+    document.getElementById("applicationRows").innerHTML=rows.map(a=>`<tr><td><span class="student">${a.name}</span><span class="sub">${a.email}</span></td><td>${a.institution}</td><td>${money(a.amount)}</td><td>${a.date}</td><td><span class="status ${a.status.toLowerCase()}">${a.status}</span></td><td><button class="action" onclick="openApplication(${a.id})">Review</button></td></tr>`).join("");
+    document.getElementById("emptyState").style.display=rows.length?"none":"block";
+    document.getElementById("totalCount").textContent=applications.length;
+    document.getElementById("pendingCount").textContent=applications.filter(a=>a.status==="Pending").length;
+    document.getElementById("approvedCount").textContent=applications.filter(a=>a.status==="Approved").length;
+    document.getElementById("rejectedCount").textContent=applications.filter(a=>a.status==="Rejected").length;
+  }
+  function openApplication(id){
+    const a=applications.find(x=>x.id===id); selectedId=id;
+    document.getElementById("modalTitle").textContent="Application review";
+    document.getElementById("modalBody").innerHTML=`<p><strong>Student:</strong> ${a.name}</p><p><strong>Email:</strong> ${a.email}</p><p><strong>Institution:</strong> ${a.institution}</p><p><strong>Amount requested:</strong> ${money(a.amount)}</p><p><strong>Submitted:</strong> ${a.date}</p><p><strong>Current status:</strong> ${a.status}</p>`;
+    document.getElementById("approveBtn").style.display=a.status==="Approved"?"none":"inline-block";
+    document.getElementById("rejectBtn").style.display=a.status==="Rejected"?"none":"inline-block";
+    document.getElementById("modalBackdrop").style.display="flex";
+  }
+  function closeModal(){document.getElementById("modalBackdrop").style.display="none"}
+  function updateStatus(status){const a=applications.find(x=>x.id===selectedId);if(a){a.status=status;render();closeModal()}}
+  document.getElementById("approveBtn").addEventListener("click",()=>updateStatus("Approved"));
+  document.getElementById("rejectBtn").addEventListener("click",()=>updateStatus("Rejected"));
+  document.getElementById("searchInput").addEventListener("input",render);
+  document.getElementById("statusFilter").addEventListener("change",render);
+  function showStudents(event){event.preventDefault();alert("Student management will be added when the secure backend is connected.");}
+  render();
+</script>
+</body>
+</html>

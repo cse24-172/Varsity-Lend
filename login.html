@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Student login | Varsity Lend</title><link rel="stylesheet" href="portal.css"></head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">V</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><a class="top-link" href="register.html">New here? <b>Create account</b></a></header>
+<main class="auth-wrap login-wrap">
+  <section class="intro"><p class="eyebrow">STUDENT PORTAL</p><h1>Your future<br>is worth <em>investing in.</em></h1><p>Log in to view your dashboard and keep up with your funding journey.</p><div class="mini-stats"><div><b>01</b><span>Sign in</span></div><div><b>02</b><span>Apply</span></div><div><b>03</b><span>Track</span></div></div></section>
+  <section class="panel">
+    <h2>Welcome back</h2><p class="muted">Enter your account details below.</p>
+    <form id="loginForm">
+      <label>Email address *</label><input name="email" type="email" required placeholder="you@example.com">
+      <label>Password *</label><input name="password" type="password" required placeholder="Your password">
+      <button class="btn primary full" type="submit">Log in <span>→</span></button><p class="form-message" id="loginMessage" aria-live="polite"></p>
+    </form>
+    <p class="muted center">Don't have an account? <a href="register.html">Create one</a></p>
+    <div class="note">Prototype only: login is a front-end demonstration, not real authentication. Do not use a real password.</div>
+  </section>
+</main><script src="portal.js"></script></body></html>

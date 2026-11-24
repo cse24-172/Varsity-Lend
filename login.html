@@ -15,14 +15,10 @@
 :root {
     --navy:#101943;
     --blue:#263fae;
-    --blue2:#4260d5;
     --yellow:#ffd94f;
     --ink:#17203b;
     --muted:#737b91;
-    --pale:#f4f6fc;
-    --white:#fff;
     --red:#c62828;
-    --green:#16834b;
 }
 
 * { box-sizing:border-box; }
@@ -101,8 +97,8 @@ header {
     color:var(--navy);
 }
 
-.navlinks a.active,
-.navlinks a.primary {
+.navlinks a.primary,
+.navlinks a.active {
     background:var(--blue);
     color:white;
 }
@@ -259,11 +255,6 @@ input.invalid {
     color:#1b2341;
 }
 
-.btn-blue {
-    background:var(--blue);
-    color:#fff;
-}
-
 .btn-outline {
     border:1px solid #dce2f6;
     color:var(--blue);
@@ -333,6 +324,7 @@ input.invalid {
     line-height:1.6;
     color:#858da1;
     margin:16px 0 0;
+    text-align:center;
 }
 
 footer {
@@ -388,7 +380,6 @@ footer {
 
 <header>
     <div class="wrap nav">
-
         <a class="brand" href="index.html">
             <span class="brand-mark">Vℒ</span>
             <span>
@@ -402,7 +393,6 @@ footer {
             <a class="primary" href="register.html">Create account</a>
             <a class="active" href="login.html">Student login</a>
         </nav>
-
     </div>
 </header>
 
@@ -418,7 +408,7 @@ footer {
     <section class="panel">
 
         <h2>Welcome back</h2>
-        <p class="sub">Enter your account details to continue.</p>
+        <p class="sub">Enter your details to explore your student dashboard.</p>
 
         <form id="loginForm" novalidate>
 
@@ -426,7 +416,6 @@ footer {
 
                 <div class="field">
                     <label for="email">Email address</label>
-
                     <input
                         id="email"
                         name="email"
@@ -435,7 +424,6 @@ footer {
                         placeholder="Enter your email"
                         required
                     >
-
                     <span class="field-error" id="emailError"></span>
                 </div>
 
@@ -484,8 +472,8 @@ footer {
         </p>
 
         <p class="note">
-            Your student account gives you access to your funding information
-            and application dashboard.
+            Preview mode: explore the student dashboard without connecting
+            to the backend. No real account is authenticated.
         </p>
 
     </section>
@@ -510,10 +498,8 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const loginButton = document.getElementById("loginButton");
 const loginMessage = document.getElementById("loginMessage");
-
 const togglePassword = document.getElementById("togglePassword");
 
-// Show and hide password.
 togglePassword.addEventListener("click", function() {
     const showing = passwordInput.type === "text";
 
@@ -521,7 +507,6 @@ togglePassword.addEventListener("click", function() {
     togglePassword.textContent = showing ? "Show" : "Hide";
 });
 
-// Inline messages.
 function showMessage(message, type) {
     loginMessage.textContent = message;
     loginMessage.className = type;
@@ -532,7 +517,6 @@ function clearMessage() {
     loginMessage.className = "";
 }
 
-// Clear field errors while typing.
 emailInput.addEventListener("input", function() {
     document.getElementById("emailError").textContent = "";
     emailInput.classList.remove("invalid");
@@ -545,7 +529,6 @@ passwordInput.addEventListener("input", function() {
     clearMessage();
 });
 
-// Login form validation.
 loginForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -577,9 +560,9 @@ loginForm.addEventListener("submit", function(event) {
         valid = false;
     }
 
-    if (!password) {
+    if (!password.trim()) {
         document.getElementById("passwordError").textContent =
-            "Please enter your password.";
+            "Please enter a password.";
 
         passwordInput.classList.add("invalid");
         valid = false;
@@ -600,10 +583,30 @@ loginForm.addEventListener("submit", function(event) {
         return;
     }
 
-    showMessage(
-        "Your details are valid. Secure sign-in is the next connection to implement.",
-        "info"
-    );
+    loginButton.disabled = true;
+    loginButton.textContent = "Opening dashboard...";
+
+    try {
+        // Preview identity only. Never store the password.
+        sessionStorage.setItem("varsityLendPreview", "true");
+        sessionStorage.setItem("varsityLendPreviewEmail", email);
+
+        showMessage(
+            "Welcome! Opening your student dashboard in preview mode...",
+            "success"
+        );
+
+        window.location.href = "dashboard.html?preview=1";
+
+    } catch (error) {
+        loginButton.disabled = false;
+        loginButton.textContent = "Sign in";
+
+        showMessage(
+            "Your browser could not start preview mode. Please enable session storage and try again.",
+            "error"
+        );
+    }
 });
 </script>
 

@@ -1,109 +1,943 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Varsity Lend</title>
-  <style>
-    :root{--navy:#102b5c;--blue:#174a91;--yellow:#f5c542;--bg:#f4f6fa;--ink:#17243a;--muted:#718096;--line:#e7ebf2;--white:#fff;--green:#16845b;--red:#c44848}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-    button,input,select{font:inherit}.layout{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
-    aside{background:var(--navy);color:#fff;padding:25px 18px;display:flex;flex-direction:column}
-    .brand{font-weight:800;font-size:20px;letter-spacing:1px;padding:5px 10px}.brand small{display:block;color:#c7d5ec;font-size:10px;letter-spacing:2px;margin-top:5px}
-    .admin-tag{margin:28px 10px 16px;padding:12px;border:1px solid #45618a;border-radius:10px;background:#18396f;font-size:12px;color:#d9e4f5}
-    .admin-tag strong{display:block;color:white;font-size:14px;margin-bottom:4px}
-    nav{display:grid;gap:7px}nav a{color:#dce6f5;text-decoration:none;padding:12px 13px;border-radius:8px;font-size:14px;display:flex;gap:12px;align-items:center}nav a.active,nav a:hover{background:#234b86;color:#fff}nav a.active{border-left:3px solid var(--yellow)}
-    .sidebar-bottom{margin-top:auto;padding:18px 10px 4px;color:#aebed6;font-size:11px;line-height:1.6}
-    main{min-width:0}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px}
-    .topbar h1{font-size:18px;margin:0}.top-right{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}.avatar{width:36px;height:36px;border-radius:50%;background:#e8effa;color:var(--navy);display:grid;place-items:center;font-weight:700}
-    .content{padding:30px 34px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:25px}.welcome h2{margin:0 0 7px;font-size:25px;color:var(--navy)}.welcome p{margin:0;color:var(--muted);font-size:14px}.date{font-size:12px;color:var(--muted);padding-top:7px}
-    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:25px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:19px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:9px;background:#edf3fc;display:grid;place-items:center;color:var(--blue);font-size:17px}.stat strong{display:block;font-size:27px;color:var(--navy);margin:14px 0 5px}.stat small{font-size:11px;color:var(--muted)}
-    .panel{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel-head{padding:19px 21px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line)}.panel-head h3{margin:0;font-size:16px;color:var(--navy)}.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px}
-    .tools{display:flex;gap:9px;align-items:center}.search{border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:205px;outline:none;font-size:12px}.filter{border:1px solid var(--line);border-radius:8px;padding:9px;background:white;color:#44536a;font-size:12px}
-    .table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:720px}th,td{text-align:left;padding:14px 20px;border-bottom:1px solid #edf0f5;font-size:12px}th{color:var(--muted);font-weight:600;background:#fbfcfe}td{color:#344258}.student{font-weight:700;color:var(--navy)}.sub{display:block;color:#8994a5;font-size:11px;margin-top:4px}
-    .status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}.pending{background:#fff4d6;color:#946600}.approved{background:#e3f5ed;color:#14734f}.rejected{background:#fdeaea;color:#a63838}
-    .action{border:0;background:#edf3fc;color:var(--blue);padding:7px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer}.empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;display:none}
-    .note{margin-top:18px;background:#fff9e7;border:1px solid #f3e3ad;border-radius:10px;padding:13px 15px;color:#765d16;font-size:12px;line-height:1.5}
-    .modal-backdrop{position:fixed;inset:0;background:#0c1b31a8;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal{background:white;border-radius:14px;padding:24px;width:min(430px,100%)}.modal h3{margin:0 0 15px;color:var(--navy)}.modal p{font-size:13px;color:#5c687a;line-height:1.6}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.btn{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700;font-size:12px}.btn-light{background:#edf1f7;color:#43516a}.btn-primary{background:var(--navy);color:white}
-    @media(max-width:900px){.layout{grid-template-columns:1fr}aside{padding:14px 16px}.brand{font-size:17px}.admin-tag,.sidebar-bottom{display:none}nav{display:flex;overflow-x:auto;margin-top:13px}nav a{white-space:nowrap;padding:10px}.topbar{height:62px;padding:0 18px}.content{padding:22px 16px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{align-items:flex-start;flex-direction:column}.tools{width:100%}.search{flex:1;width:100%}}
-    @media(max-width:420px){.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:23px}.welcome h2{font-size:21px}.date{display:none}.top-right span{display:none}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102b5c">
+<meta name="description" content="Varsity Lend administrator management dashboard.">
+<title>Admin Dashboard | Varsity Lend</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --navy: #102b5c;
+    --blue: #174a91;
+    --yellow: #f5c542;
+    --bg: #f4f6fa;
+    --ink: #17243a;
+    --muted: #718096;
+    --line: #e7ebf2;
+    --white: #fff;
+    --green: #16845b;
+    --red: #c44848;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "DM Sans", Arial, sans-serif;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+.layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+}
+
+/* SIDEBAR */
+
+aside {
+    background: var(--navy);
+    color: #fff;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.brand {
+    font-family: Manrope, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.brand small {
+    display: block;
+    color: #c7d5ec;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.admin-tag {
+    margin: 28px 10px 16px;
+    padding: 12px;
+    border: 1px solid #45618a;
+    border-radius: 10px;
+    background: #18396f;
+    font-size: 12px;
+    color: #d9e4f5;
+}
+
+.admin-tag strong {
+    display: block;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+nav {
+    display: grid;
+    gap: 7px;
+}
+
+nav a {
+    color: #dce6f5;
+    padding: 12px 13px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    transition: .2s;
+}
+
+nav a.active,
+nav a:hover {
+    background: #234b86;
+    color: #fff;
+}
+
+nav a.active {
+    border-left: 3px solid var(--yellow);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 18px 10px 4px;
+    color: #aebed6;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* MAIN */
+
+main {
+    min-width: 0;
+}
+
+.topbar {
+    min-height: 76px;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 34px;
+}
+
+.topbar h1 {
+    font: 800 19px Manrope, Arial, sans-serif;
+    margin: 0;
+    color: var(--navy);
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e8effa;
+    color: var(--navy);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+}
+
+.content {
+    padding: 30px 34px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.page-section {
+    scroll-margin-top: 95px;
+}
+
+.welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    margin: 0 0 7px;
+    font: 800 25px Manrope, Arial, sans-serif;
+    color: var(--navy);
+}
+
+.welcome p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.date {
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 7px;
+}
+
+/* NOTICE */
+
+.notice {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    background: #fff9e7;
+    border: 1px solid #f3e3ad;
+    border-radius: 11px;
+    padding: 15px;
+    margin-bottom: 23px;
+}
+
+.notice-icon {
+    height: 30px;
+    width: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f7e9b9;
+    color: #765d16;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.notice strong {
+    display: block;
+    color: #765d16;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.notice p {
+    color: #806b36;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* STATISTICS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 19px;
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    gap: 8px;
+}
+
+.stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #edf3fc;
+    display: grid;
+    place-items: center;
+    color: var(--blue);
+    font-size: 17px;
+}
+
+.stat strong {
+    display: block;
+    font: 800 27px Manrope, Arial, sans-serif;
+    color: var(--navy);
+    margin: 14px 0 5px;
+}
+
+.stat small {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* PANELS */
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    overflow: hidden;
+    margin-bottom: 22px;
+}
+
+.panel-head {
+    padding: 19px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+.panel-head h3 {
+    margin: 0;
+    font: 800 16px Manrope, Arial, sans-serif;
+    color: var(--navy);
+}
+
+.panel-head p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* TOOLS */
+
+.tools {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+}
+
+.search,
+.filter {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 11px;
+    background: #fff;
+    color: var(--ink);
+    outline: none;
+    font-size: 12px;
+}
+
+.search {
+    width: 230px;
+}
+
+.search:focus,
+.filter:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px #174a9110;
+}
+
+/* TABLE */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 720px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 14px 20px;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 12px;
+}
+
+th {
+    color: var(--muted);
+    font-weight: 700;
+    background: #fbfcfe;
+}
+
+td {
+    color: #344258;
+}
+
+.student {
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.sub {
+    display: block;
+    color: #8994a5;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* EMPTY STATE */
+
+.empty {
+    padding: 45px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #edf3fc;
+    color: var(--blue);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 auto 14px;
+}
+
+.empty strong {
+    display: block;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.empty p {
+    max-width: 390px;
+    margin: auto;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* STUDENT SECTION */
+
+.student-info {
+    padding: 22px;
+}
+
+.student-info h4 {
+    color: var(--navy);
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.student-info p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* INLINE FEEDBACK */
+
+.feedback {
+    display: none;
+    padding: 13px 15px;
+    margin: 15px 20px;
+    border-radius: 9px;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.feedback.show {
+    display: block;
+}
+
+.feedback.info {
+    color: #315184;
+    background: #edf3fc;
+    border: 1px solid #d5e2f4;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 20px 34px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1000px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        min-height: auto;
+        padding: 15px 18px;
+    }
+
+    .admin-tag,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    nav {
+        display: flex;
+        overflow-x: auto;
+        margin-top: 13px;
+    }
+
+    nav a {
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    .topbar {
+        min-height: 62px;
+        padding: 0 20px;
+    }
+
+    .content {
+        padding: 22px 20px;
+    }
+}
+
+@media(max-width: 800px) {
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tools {
+        width: 100%;
+    }
+
+    .search {
+        flex: 1;
+        width: 100%;
+    }
+}
+
+@media(max-width: 480px) {
+    .stats {
+        gap: 9px;
+    }
+
+    .stat {
+        padding: 14px;
+    }
+
+    .stat strong {
+        font-size: 23px;
+    }
+
+    .welcome h2 {
+        font-size: 21px;
+    }
+
+    .date {
+        display: none;
+    }
+
+    .top-right span {
+        display: none;
+    }
+
+    .tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter {
+        width: 100%;
+    }
+
+    footer {
+        padding: 18px 20px;
+    }
+}
+</style>
 </head>
+
 <body>
+
 <div class="layout">
-  <aside>
-    <div class="brand">VARSITY LEND<small>STUDENT FUNDING</small></div>
-    <div class="admin-tag"><strong>Administrator</strong>Management workspace</div>
-    <nav>
-      <a class="active" href="#overview">▦ &nbsp; Overview</a>
-      <a href="#applications">▤ &nbsp; Applications</a>
-      <a href="#students" onclick="showStudents(event)">♙ &nbsp; Students</a>
-    </nav>
-    <div class="sidebar-bottom">VARSITY LEND ADMIN<br>Private management area<br><br>© 2026 Varsity Lend</div>
-  </aside>
-  <main>
-    <header class="topbar">
-      <h1>Admin Dashboard</h1>
-      <div class="top-right"><span>Administrator</span><div class="avatar">A</div></div>
-    </header>
-    <section class="content" id="overview">
-      <div class="welcome"><div><h2>Welcome back, Admin</h2><p>Here's an overview of your student funding activity.</p></div><div class="date">Management overview</div></div>
-      <div class="stats">
-        <div class="stat"><div class="stat-top">Total applications <span class="stat-icon">▤</span></div><strong id="totalCount">4</strong><small>Applications received</small></div>
-        <div class="stat"><div class="stat-top">Pending review <span class="stat-icon">◷</span></div><strong id="pendingCount">2</strong><small>Awaiting a decision</small></div>
-        <div class="stat"><div class="stat-top">Approved <span class="stat-icon">✓</span></div><strong id="approvedCount">1</strong><small>Marked as approved</small></div>
-        <div class="stat"><div class="stat-top">Rejected <span class="stat-icon">×</span></div><strong id="rejectedCount">1</strong><small>Marked as rejected</small></div>
-      </div>
-      <section class="panel" id="applications">
-        <div class="panel-head"><div><h3>Recent applications</h3><p>Review and update application statuses.</p></div>
-          <div class="tools"><input class="search" id="searchInput" type="search" placeholder="Search student or institution..." aria-label="Search applications"><select class="filter" id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select></div>
+
+    <!-- SIDEBAR -->
+
+    <aside>
+
+        <a href="index.html" class="brand">
+            VARSITY LEND
+            <small>STUDENT FUNDING</small>
+        </a>
+
+        <div class="admin-tag">
+            <strong>Administrator</strong>
+            Management workspace
         </div>
-        <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>INSTITUTION</th><th>AMOUNT</th><th>DATE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="applicationRows"></tbody></table></div>
-        <div class="empty" id="emptyState">No matching applications found.</div>
-      </section>
-      <div class="note"><strong>Demo dashboard:</strong> The records shown are sample data for layout testing only. Changes made here are temporary and will reset when the page is refreshed. No real student applications are stored or processed.</div>
-    </section>
-  </main>
+
+        <nav>
+            <a href="#overview" class="active" data-section="overview">
+                <span>▦</span> Overview
+            </a>
+
+            <a href="#applications" data-section="applications">
+                <span>▤</span> Applications
+            </a>
+
+            <a href="#students" data-section="students">
+                <span>♙</span> Students
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            VARSITY LEND ADMIN<br>
+            Private management area<br><br>
+            © <span id="sidebarYear"></span> Varsity Lend
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main>
+
+        <header class="topbar">
+            <h1>Admin Dashboard</h1>
+
+            <div class="top-right">
+                <span>Administrator</span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+        <section class="content">
+
+            <!-- OVERVIEW -->
+
+            <section class="page-section" id="overview">
+
+                <div class="welcome">
+                    <div>
+                        <h2>Welcome back, Admin</h2>
+                        <p>Here's an overview of your student funding activity.</p>
+                    </div>
+
+                    <div class="date">Management overview</div>
+                </div>
+
+                <div class="notice">
+                    <div class="notice-icon">!</div>
+                    <div>
+                        <strong>Administrator services are not connected yet.</strong>
+                        <p>
+                            This is the dashboard interface preview. Real student
+                            records, application submissions and approval decisions
+                            will appear after secure administrator services are connected.
+                            Do not use this preview to make real funding decisions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STATISTICS -->
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <div class="stat-top">
+                            Total applications
+                            <span class="stat-icon">▤</span>
+                        </div>
+                        <strong id="totalCount">0</strong>
+                        <small>Applications received</small>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-top">
+                            Pending review
+                            <span class="stat-icon">◷</span>
+                        </div>
+                        <strong id="pendingCount">0</strong>
+                        <small>Awaiting a decision</small>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-top">
+                            Approved
+                            <span class="stat-icon">✓</span>
+                        </div>
+                        <strong id="approvedCount">0</strong>
+                        <small>Marked as approved</small>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-top">
+                            Rejected
+                            <span class="stat-icon">×</span>
+                        </div>
+                        <strong id="rejectedCount">0</strong>
+                        <small>Marked as rejected</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- APPLICATIONS -->
+
+            <section class="panel page-section" id="applications">
+
+                <div class="panel-head">
+                    <div>
+                        <h3>Student applications</h3>
+                        <p>Search and filter funding applications.</p>
+                    </div>
+
+                    <div class="tools">
+
+                        <input
+                            class="search"
+                            id="searchInput"
+                            type="search"
+                            placeholder="Search student or institution..."
+                            aria-label="Search applications"
+                        >
+
+                        <select class="filter" id="statusFilter" aria-label="Filter applications">
+                            <option value="all">All statuses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STUDENT</th>
+                                <th>INSTITUTION</th>
+                                <th>AMOUNT</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="applicationRows"></tbody>
+                    </table>
+                </div>
+
+                <div class="empty" id="emptyState">
+                    <div class="empty-icon">▤</div>
+                    <strong id="emptyTitle">No applications available</strong>
+                    <p id="emptyDescription">
+                        Student applications will appear here when the secure
+                        application service is connected.
+                    </p>
+                </div>
+
+                <div class="feedback info" id="applicationFeedback" role="status" aria-live="polite"></div>
+
+            </section>
+
+            <!-- STUDENTS -->
+
+            <section class="panel page-section" id="students">
+
+                <div class="panel-head">
+                    <div>
+                        <h3>Student management</h3>
+                        <p>View and manage registered student accounts.</p>
+                    </div>
+                </div>
+
+                <div class="student-info">
+                    <div class="empty-icon">♙</div>
+                    <h4>Student records are not connected</h4>
+                    <p>
+                        Registered student accounts will appear here after the
+                        administrator service is connected to the student database.
+                        Student profile management and account actions are not
+                        available in this preview.
+                    </p>
+                </div>
+
+            </section>
+
+        </section>
+
+        <footer>
+            VARSITY LEND · Administrator workspace · Botswana
+        </footer>
+
+    </main>
+
 </div>
-<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal"><h3 id="modalTitle">Application details</h3><div id="modalBody"></div><div class="modal-actions"><button class="btn btn-light" onclick="closeModal()">Close</button><button class="btn btn-primary" id="approveBtn">Approve</button><button class="btn btn-primary" id="rejectBtn" style="background:#a63838">Reject</button></div></div>
-</div>
+
 <script>
-  const applications = [
-    {id:1,name:"Kabelo M.",email:"kabelo@example.com",institution:"University of Botswana",amount:5000,date:"22 Nov 2026",status:"Pending"},
-    {id:2,name:"Boitumelo K.",email:"boitumelo@example.com",institution:"Botswana Accountancy College",amount:3500,date:"21 Nov 2026",status:"Pending"},
-    {id:3,name:"Neo T.",email:"neo@example.com",institution:"Limkokwing University",amount:4200,date:"19 Nov 2026",status:"Approved"},
-    {id:4,name:"Thato R.",email:"thato@example.com",institution:"Botho University",amount:2500,date:"18 Nov 2026",status:"Rejected"}
-  ];
-  let selectedId = null;
-  const money = n => "P" + n.toLocaleString("en-BW");
-  function render(){
-    const query=document.getElementById("searchInput").value.toLowerCase();
-    const filter=document.getElementById("statusFilter").value;
-    const rows=applications.filter(a=>(filter==="all"||a.status===filter)&&(`${a.name} ${a.email} ${a.institution}`).toLowerCase().includes(query));
-    document.getElementById("applicationRows").innerHTML=rows.map(a=>`<tr><td><span class="student">${a.name}</span><span class="sub">${a.email}</span></td><td>${a.institution}</td><td>${money(a.amount)}</td><td>${a.date}</td><td><span class="status ${a.status.toLowerCase()}">${a.status}</span></td><td><button class="action" onclick="openApplication(${a.id})">Review</button></td></tr>`).join("");
-    document.getElementById("emptyState").style.display=rows.length?"none":"block";
-    document.getElementById("totalCount").textContent=applications.length;
-    document.getElementById("pendingCount").textContent=applications.filter(a=>a.status==="Pending").length;
-    document.getElementById("approvedCount").textContent=applications.filter(a=>a.status==="Approved").length;
-    document.getElementById("rejectedCount").textContent=applications.filter(a=>a.status==="Rejected").length;
-  }
-  function openApplication(id){
-    const a=applications.find(x=>x.id===id); selectedId=id;
-    document.getElementById("modalTitle").textContent="Application review";
-    document.getElementById("modalBody").innerHTML=`<p><strong>Student:</strong> ${a.name}</p><p><strong>Email:</strong> ${a.email}</p><p><strong>Institution:</strong> ${a.institution}</p><p><strong>Amount requested:</strong> ${money(a.amount)}</p><p><strong>Submitted:</strong> ${a.date}</p><p><strong>Current status:</strong> ${a.status}</p>`;
-    document.getElementById("approveBtn").style.display=a.status==="Approved"?"none":"inline-block";
-    document.getElementById("rejectBtn").style.display=a.status==="Rejected"?"none":"inline-block";
-    document.getElementById("modalBackdrop").style.display="flex";
-  }
-  function closeModal(){document.getElementById("modalBackdrop").style.display="none"}
-  function updateStatus(status){const a=applications.find(x=>x.id===selectedId);if(a){a.status=status;render();closeModal()}}
-  document.getElementById("approveBtn").addEventListener("click",()=>updateStatus("Approved"));
-  document.getElementById("rejectBtn").addEventListener("click",()=>updateStatus("Rejected"));
-  document.getElementById("searchInput").addEventListener("input",render);
-  document.getElementById("statusFilter").addEventListener("change",render);
-  function showStudents(event){event.preventDefault();alert("Student management will be added when the secure backend is connected.");}
-  render();
+/* YEAR */
+
+const currentYear = new Date().getFullYear();
+
+document.getElementById("sidebarYear").textContent = currentYear;
+
+/* APPLICATION DATA */
+
+const applications = [];
+
+/* ELEMENTS */
+
+const searchInput = document.getElementById("searchInput");
+const statusFilter = document.getElementById("statusFilter");
+const applicationRows = document.getElementById("applicationRows");
+const emptyState = document.getElementById("emptyState");
+const emptyTitle = document.getElementById("emptyTitle");
+const emptyDescription = document.getElementById("emptyDescription");
+
+/* RENDER APPLICATIONS */
+
+function renderApplications() {
+
+    const query = searchInput.value.trim().toLowerCase();
+    const filter = statusFilter.value;
+
+    const filteredApplications = applications.filter(application => {
+
+        const matchesStatus =
+            filter === "all" || application.status === filter;
+
+        const searchableText = [
+            application.name,
+            application.email,
+            application.institution
+        ].join(" ").toLowerCase();
+
+        const matchesSearch = searchableText.includes(query);
+
+        return matchesStatus && matchesSearch;
+    });
+
+    applicationRows.innerHTML = "";
+
+    filteredApplications.forEach(application => {
+
+        const row = document.createElement("tr");
+
+        const studentCell = document.createElement("td");
+        const studentName = document.createElement("span");
+        const studentEmail = document.createElement("span");
+
+        studentName.className = "student";
+        studentName.textContent = application.name;
+
+        studentEmail.className = "sub";
+        studentEmail.textContent = application.email;
+
+        studentCell.append(studentName, studentEmail);
+
+        const institutionCell = document.createElement("td");
+        institutionCell.textContent = application.institution;
+
+        const amountCell = document.createElement("td");
+        amountCell.textContent = "P" + Number(application.amount).toLocaleString("en-BW");
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = application.date;
+
+        const statusCell = document.createElement("td");
+        statusCell.textContent = application.status;
+
+        row.append(
+            studentCell,
+            institutionCell,
+            amountCell,
+            dateCell,
+            statusCell
+        );
+
+        applicationRows.appendChild(row);
+    });
+
+    const hasResults = filteredApplications.length > 0;
+
+    emptyState.style.display = hasResults ? "none" : "block";
+
+    if (!hasResults && applications.length > 0) {
+        emptyTitle.textContent = "No matching applications";
+        emptyDescription.textContent =
+            "Try changing your search term or selecting a different status.";
+    } else if (!hasResults) {
+        emptyTitle.textContent = "No applications available";
+        emptyDescription.textContent =
+            "Student applications will appear here when the secure application service is connected.";
+    }
+
+    updateStatistics();
+}
+
+/* UPDATE STATISTICS */
+
+function updateStatistics() {
+
+    document.getElementById("totalCount").textContent =
+        applications.length;
+
+    document.getElementById("pendingCount").textContent =
+        applications.filter(a => a.status === "Pending").length;
+
+    document.getElementById("approvedCount").textContent =
+        applications.filter(a => a.status === "Approved").length;
+
+    document.getElementById("rejectedCount").textContent =
+        applications.filter(a => a.status === "Rejected").length;
+}
+
+/* SEARCH AND FILTER */
+
+searchInput.addEventListener("input", renderApplications);
+statusFilter.addEventListener("change", renderApplications);
+
+/* SIDEBAR NAVIGATION */
+
+const navigationLinks = document.querySelectorAll("nav a");
+
+navigationLinks.forEach(link => {
+
+    link.addEventListener("click", function () {
+
+        navigationLinks.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        this.classList.add("active");
+    });
+
+});
+
+/* INITIALISE */
+
+renderApplications();
 </script>
+
 </body>
 </html>

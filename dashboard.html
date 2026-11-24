@@ -1,53 +1,892 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101b50"><title>Student Dashboard | Varsity Lend</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b50">
+<meta name="description" content="Manage your Varsity Lend student funding journey.">
+<title>Student Dashboard | Varsity Lend</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--navy:#101943;--blue:#263fae;--blue2:#4260d5;--yellow:#ffd94f;--ink:#17203b;--muted:#737b91;--pale:#f4f6fc;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff}a{text-decoration:none;color:inherit}
-.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-header{height:78px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #edf0f6}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,Arial,sans-serif;font-weight:800;letter-spacing:-.5px;color:var(--navy);font-size:18px}
-.brand-mark{height:43px;width:43px;border-radius:14px;background:linear-gradient(145deg,#4666e1,#101943);display:grid;place-items:center;color:#fff;font-size:19px}
-.brand small{display:block;font:700 9px Arial,sans-serif;letter-spacing:2px;color:#8991a8;margin-top:2px}
-.navlinks{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.navlinks a{font-size:13px;font-weight:800;padding:11px 15px;border-radius:30px;color:var(--navy)}
-.navlinks a.active,.navlinks a.primary{background:var(--blue);color:white}
-.navlinks a:hover{background:#eef1ff;color:var(--blue)}
-main{min-height:calc(100vh - 150px);background:linear-gradient(180deg,#f7f8fd 0%,#fff 360px);padding:54px 0 70px}
-.page-heading{text-align:center;margin:0 auto 28px;max-width:650px}
-.kicker{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
-h1{font:800 clamp(32px,5vw,46px)/1.12 Manrope,Arial,sans-serif;letter-spacing:-1.5px;margin:12px 0;color:var(--navy)}
-.page-heading p{font-size:15px;line-height:1.7;color:var(--muted);margin:0}
-.panel{background:#fff;border:1px solid #e8ebf4;border-radius:23px;padding:30px;box-shadow:0 15px 45px #1b2c6710;max-width:620px;margin:auto}
-.panel.wide{max-width:900px}
-.panel h2{font:800 22px Manrope,Arial,sans-serif;margin:0 0 7px;color:var(--navy)}
-.sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.field{display:grid;gap:7px}.field.full{grid-column:1/-1}
-label{font-size:12px;font-weight:800;color:#48516a}
-input,select,textarea{width:100%;border:1px solid #dfe3ed;border-radius:11px;padding:13px;font:14px Arial,sans-serif;color:var(--ink);background:#fff}
-input:focus,select:focus,textarea:focus{outline:0;border-color:#6179dc;box-shadow:0 0 0 3px #263fae12}
-textarea{min-height:90px;resize:vertical}
-.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:30px;padding:14px 22px;font-weight:800;font-size:14px;cursor:pointer}
-.btn-yellow{background:var(--yellow);color:#1b2341}.btn-blue{background:var(--blue);color:#fff}.btn-outline{border:1px solid #dce2f6;color:var(--blue);background:#fff}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.note{font-size:11px;line-height:1.6;color:#858da1;margin:16px 0 0}
-footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}
-.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.foot strong{color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
-.tile{border:1px solid #e8ebf4;border-radius:17px;padding:20px;background:#fff}
-.tile small{display:block;color:var(--muted);font-size:12px;margin-bottom:9px}.tile strong{font:800 19px Manrope,Arial,sans-serif;color:var(--navy)}
-@media(max-width:650px){header{height:auto;padding:13px 0}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%;gap:4px}.navlinks a{padding:9px 10px;font-size:12px}main{padding:38px 0 55px}.panel{padding:22px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.tiles{grid-template-columns:1fr}}
-</style></head><body>
-<header><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><nav class="navlinks"><a class="" href="index.html">Home</a><a class="primary" href="register.html">Create account</a><a class="" href="login.html">Student login</a></nav></div></header>
-<main><div class="wrap"><div class="page-heading"><div class="kicker">STUDENT AREA</div><h1>Your dashboard.</h1><p>Keep track of your funding journey from one place.</p></div>
-<section class="panel wide"><h2>Your student dashboard</h2><p class="sub">Your Varsity Lend account overview and funding application area.</p>
-<div class="tiles"><div class="tile"><small>Application status</small><strong>Not submitted</strong></div><div class="tile"><small>Funding requests</small><strong>0</strong></div><div class="tile"><small>Profile</small><strong>Student</strong></div></div>
-<div class="btn-row"><a class="btn btn-yellow" href="apply.html">Start funding application</a><a class="btn btn-outline" href="index.html">Back to homepage</a></div>
-</section></div></main>
-<footer><div class="wrap foot"><span><strong>VARSITY LEND</strong> · Quick Student Funding</span><span>Botswana</span><span>© <span id="year"></span> Varsity Lend</span></div></footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-</body></html>
+:root {
+    --navy: #101943;
+    --blue: #263fae;
+    --blue2: #4260d5;
+    --yellow: #ffd94f;
+    --ink: #17203b;
+    --muted: #737b91;
+    --pale: #f4f6fc;
+    --white: #fff;
+    --border: #e8ebf4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "DM Sans", Arial, sans-serif;
+    color: var(--ink);
+    background: #f7f8fd;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+.wrap {
+    width: min(1120px, calc(100% - 40px));
+    margin: auto;
+}
+
+/* HEADER */
+
+header {
+    background: #fff;
+    border-bottom: 1px solid #edf0f6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Manrope, Arial, sans-serif;
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 18px;
+    letter-spacing: -.5px;
+}
+
+.brand-mark {
+    height: 43px;
+    width: 43px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #4666e1, #101943);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 19px;
+}
+
+.brand small {
+    display: block;
+    font: 700 9px Arial, sans-serif;
+    letter-spacing: 2px;
+    color: #8991a8;
+    margin-top: 2px;
+}
+
+.navlinks {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.navlinks a {
+    font-size: 13px;
+    font-weight: 800;
+    padding: 11px 15px;
+    border-radius: 30px;
+    color: var(--navy);
+}
+
+.navlinks a.active,
+.navlinks a.primary {
+    background: var(--blue);
+    color: white;
+}
+
+.navlinks a:hover {
+    background: #eef1ff;
+    color: var(--blue);
+}
+
+/* MAIN */
+
+main {
+    min-height: calc(100vh - 150px);
+    padding: 42px 0 70px;
+    background: linear-gradient(180deg, #f7f8fd 0%, #fff 400px);
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+
+h1 {
+    font: 800 clamp(30px, 5vw, 42px)/1.15 Manrope, Arial, sans-serif;
+    letter-spacing: -1.4px;
+    color: var(--navy);
+    margin: 10px 0;
+}
+
+.welcome p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.account-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 11px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #737b91;
+    white-space: nowrap;
+}
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    background: #e0a52c;
+    border-radius: 50%;
+}
+
+/* NOTICE */
+
+.notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    background: #eef2ff;
+    border: 1px solid #dce4ff;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.notice-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: #dce4ff;
+    color: var(--blue);
+    font-weight: 800;
+}
+
+.notice strong {
+    display: block;
+    color: var(--navy);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.notice p {
+    margin: 0;
+    color: #596582;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* STATISTICS */
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.tile {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    background: #fff;
+    box-shadow: 0 8px 25px #1b2c6707;
+}
+
+.tile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.tile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: #eef1ff;
+    color: var(--blue);
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.tile small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.tile strong {
+    font: 800 17px Manrope, Arial, sans-serif;
+    color: var(--navy);
+}
+
+.tile .tile-description {
+    display: block;
+    font-size: 11px;
+    color: #9299aa;
+    margin-top: 7px;
+}
+
+/* DASHBOARD GRID */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px #1b2c6708;
+}
+
+.panel + .panel {
+    margin-top: 20px;
+}
+
+.panel h2 {
+    font: 800 19px Manrope, Arial, sans-serif;
+    color: var(--navy);
+    margin: 0 0 7px;
+}
+
+.sub {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 22px;
+}
+
+/* APPLICATION TRACKER */
+
+.tracker {
+    margin: 25px 0;
+}
+
+.tracker-step {
+    display: flex;
+    gap: 14px;
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.tracker-step:last-child {
+    padding-bottom: 0;
+}
+
+.tracker-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    background: #e5e8f1;
+    top: 31px;
+    bottom: 0;
+    left: 14px;
+}
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f0f2f7;
+    color: #9299aa;
+    font-size: 12px;
+    font-weight: 800;
+    z-index: 1;
+}
+
+.step-circle.current {
+    background: #e7ecff;
+    color: var(--blue);
+}
+
+.step-content strong {
+    display: block;
+    font-size: 13px;
+    color: var(--navy);
+    margin: 3px 0 5px;
+}
+
+.step-content span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* BUTTONS */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 30px;
+    padding: 13px 20px;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-yellow {
+    background: var(--yellow);
+    color: #1b2341;
+}
+
+.btn-blue {
+    background: var(--blue);
+    color: white;
+}
+
+.btn-outline {
+    border: 1px solid #dce2f6;
+    color: var(--blue);
+    background: white;
+}
+
+.btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* QUICK ACTIONS */
+
+.action-list {
+    display: grid;
+    gap: 11px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: .2s;
+}
+
+.action:hover {
+    border-color: #aebcf3;
+    background: #fafbff;
+}
+
+.action-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: #eef1ff;
+    display: grid;
+    place-items: center;
+    color: var(--blue);
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.action-text {
+    flex: 1;
+}
+
+.action-text strong {
+    display: block;
+    font-size: 12px;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.action-text span {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.action-arrow {
+    color: var(--blue);
+    font-size: 18px;
+}
+
+/* CHECKLIST */
+
+.checklist {
+    display: grid;
+    gap: 13px;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #596176;
+}
+
+.check-item span {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f0f2f7;
+    color: #8991a8;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    flex-shrink: 0;
+}
+
+/* FAQ */
+
+details {
+    border-bottom: 1px solid #edf0f6;
+    padding: 14px 0;
+}
+
+details:last-child {
+    border-bottom: 0;
+}
+
+summary {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+details p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 10px 0 0;
+}
+
+/* FOOTER */
+
+footer {
+    background: #0b1438;
+    color: #aeb9df;
+    padding: 23px 0;
+    font-size: 11px;
+}
+
+.foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.foot strong {
+    color: #fff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 0;
+    }
+
+    .navlinks {
+        width: 100%;
+        gap: 4px;
+    }
+
+    .navlinks a {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    main {
+        padding: 30px 0 50px;
+    }
+
+    .welcome {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tiles {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 20px;
+    }
+
+    .btn-row {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="wrap nav">
+
+        <a class="brand" href="index.html">
+            <span class="brand-mark">Vℒ</span>
+            <span>
+                VARSITY LEND
+                <small>STUDENT FUNDING</small>
+            </span>
+        </a>
+
+        <nav class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="apply.html">Apply for funding</a>
+            <a href="login.html">Student login</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+<div class="wrap">
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+        <div>
+            <div class="kicker">STUDENT AREA</div>
+            <h1>Your dashboard.</h1>
+            <p>Keep track of your funding journey from one place.</p>
+        </div>
+
+        <div class="account-status">
+            <span class="status-dot"></span>
+            Account not connected
+        </div>
+    </section>
+
+    <!-- ACCOUNT NOTICE -->
+
+    <section class="notice">
+        <div class="notice-icon">i</div>
+        <div>
+            <strong>Your account information is not connected yet.</strong>
+            <p>
+                Sign in to access your personal funding information.
+                Your application details and account activity will appear here
+                once secure account services are connected.
+            </p>
+        </div>
+    </section>
+
+    <!-- OVERVIEW CARDS -->
+
+    <section class="tiles">
+
+        <div class="tile">
+            <div class="tile-top">
+                <div class="tile-icon">01</div>
+            </div>
+            <small>Application status</small>
+            <strong>Awaiting account connection</strong>
+            <span class="tile-description">Your personal status will appear here.</span>
+        </div>
+
+        <div class="tile">
+            <div class="tile-top">
+                <div class="tile-icon">02</div>
+            </div>
+            <small>Funding requests</small>
+            <strong>Not available yet</strong>
+            <span class="tile-description">Your submitted requests will appear here.</span>
+        </div>
+
+        <div class="tile">
+            <div class="tile-top">
+                <div class="tile-icon">03</div>
+            </div>
+            <small>Student profile</small>
+            <strong>Sign-in required</strong>
+            <span class="tile-description">Your profile information will appear here.</span>
+        </div>
+
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+
+    <div class="dashboard-grid">
+
+        <div>
+
+            <!-- APPLICATION TRACKER -->
+
+            <section class="panel">
+                <h2>Funding application tracker</h2>
+                <p class="sub">
+                    Follow the stages of your Varsity Lend funding journey.
+                </p>
+
+                <div class="tracker">
+
+                    <div class="tracker-step">
+                        <div class="step-circle current">1</div>
+                        <div class="step-content">
+                            <strong>Create your student account</strong>
+                            <span>Register with your personal and student information.</span>
+                        </div>
+                    </div>
+
+                    <div class="tracker-step">
+                        <div class="step-circle">2</div>
+                        <div class="step-content">
+                            <strong>Complete your funding application</strong>
+                            <span>Provide the information required for your funding request.</span>
+                        </div>
+                    </div>
+
+                    <div class="tracker-step">
+                        <div class="step-circle">3</div>
+                        <div class="step-content">
+                            <strong>Application review</strong>
+                            <span>Your application will be reviewed once submitted.</span>
+                        </div>
+                    </div>
+
+                    <div class="tracker-step">
+                        <div class="step-circle">4</div>
+                        <div class="step-content">
+                            <strong>Funding decision</strong>
+                            <span>View your decision and any next steps when available.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="btn-row">
+                    <a href="register.html" class="btn btn-yellow">
+                        Create student account
+                    </a>
+
+                    <a href="login.html" class="btn btn-outline">
+                        Sign in
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHECKLIST -->
+
+            <section class="panel">
+                <h2>Before you apply</h2>
+                <p class="sub">
+                    Prepare the information you may need for your application.
+                </p>
+
+                <div class="checklist">
+
+                    <div class="check-item">
+                        <span>1</span>
+                        <div>Have your valid student registration information ready.</div>
+                    </div>
+
+                    <div class="check-item">
+                        <span>2</span>
+                        <div>Know your institution and programme details.</div>
+                    </div>
+
+                    <div class="check-item">
+                        <span>3</span>
+                        <div>Prepare the supporting documents requested in the application.</div>
+                    </div>
+
+                    <div class="check-item">
+                        <span>4</span>
+                        <div>Make sure your contact details are correct.</div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SIDE PANEL -->
+
+        <aside>
+
+            <section class="panel">
+                <h2>Quick actions</h2>
+                <p class="sub">Get to the important parts of Varsity Lend.</p>
+
+                <div class="action-list">
+
+                    <a href="apply.html" class="action">
+                        <div class="action-icon">+</div>
+                        <div class="action-text">
+                            <strong>Apply for funding</strong>
+                            <span>Start your funding journey</span>
+                        </div>
+                        <div class="action-arrow">›</div>
+                    </a>
+
+                    <a href="register.html" class="action">
+                        <div class="action-icon">+</div>
+                        <div class="action-text">
+                            <strong>Create an account</strong>
+                            <span>Join Varsity Lend</span>
+                        </div>
+                        <div class="action-arrow">›</div>
+                    </a>
+
+                    <a href="login.html" class="action">
+                        <div class="action-icon">→</div>
+                        <div class="action-text">
+                            <strong>Student login</strong>
+                            <span>Access your account</span>
+                        </div>
+                        <div class="action-arrow">›</div>
+                    </a>
+
+                    <a href="index.html" class="action">
+                        <div class="action-icon">⌂</div>
+                        <div class="action-text">
+                            <strong>Visit homepage</strong>
+                            <span>Learn more about Varsity Lend</span>
+                        </div>
+                        <div class="action-arrow">›</div>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- FAQ -->
+
+            <section class="panel">
+                <h2>Frequently asked questions</h2>
+                <p class="sub">A few things you may want to know.</p>
+
+                <details>
+                    <summary>Who can apply for funding?</summary>
+                    <p>
+                        Varsity Lend is designed for tertiary students in Botswana.
+                        Application eligibility will be assessed according to the
+                        platform's funding requirements.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>How do I apply?</summary>
+                    <p>
+                        Create a student account, sign in and complete the funding
+                        application with the requested information.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>How will I know my application status?</summary>
+                    <p>
+                        Your application status will be displayed in your dashboard
+                        once your account and application services are connected.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>Can I submit more than one application?</summary>
+                    <p>
+                        Application limits and repeat application rules will be
+                        communicated through the platform.
+                    </p>
+                </details>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</div>
+</main>
+
+<footer>
+    <div class="wrap foot">
+        <span><strong>VARSITY LEND</strong> · Quick Student Funding</span>
+        <span>Botswana</span>
+        <span>© <span id="year"></span> Varsity Lend</span>
+    </div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

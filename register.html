@@ -45,7 +45,58 @@ footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}
 <header><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><nav class="navlinks"><a class="" href="index.html">Home</a><a class="active primary" href="register.html">Create account</a><a class="" href="login.html">Student login</a></nav></div></header>
 <main><div class="wrap"><div class="page-heading"><div class="kicker">STUDENT REGISTRATION</div><h1>Start your funding journey.</h1><p>Create your Varsity Lend student profile.</p></div>
 <section class="panel"><h2>Create your student account</h2><p class="sub">Enter your details to get started with Varsity Lend.</p>
-<form onsubmit="event.preventDefault();alert('Your registration form is ready. Account creation will be activated when the secure account service is connected.');">
+<form id="registrationForm"></form>
+<p id="registrationMessage" role="status"></p>
+
+<script>
+const registrationForm = document.getElementById("registrationForm");
+const registrationMessage = document.getElementById("registrationMessage");
+
+registrationForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(registrationForm);
+
+    const registrationData = {
+        fullname: formData.get("fullname"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        institution: formData.get("institution"),
+        studentid: formData.get("studentid"),
+        password: formData.get("password"),
+        confirm: formData.get("confirm")
+    };
+
+    if (registrationData.password !== registrationData.confirm) {
+        registrationMessage.textContent = "Passwords do not match.";
+        return;
+    }
+
+    registrationMessage.textContent = "Creating your account...";
+
+    try {
+        const response = await fetch("YOUR_BACKEND_URL/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(registrationData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || result.detail || "Registration failed.");
+        }
+
+        registrationMessage.textContent = "Account created successfully! You can now log in.";
+        registrationForm.reset();
+
+    } catch (error) {
+        registrationMessage.textContent = error.message;
+    }
+});
+</script>
 <div class="fields">
 <div class="field full"><label for="fullname">Full name</label><input id="fullname" name="fullname" autocomplete="name" required placeholder="Enter your full name"></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="name@example.com"></div>

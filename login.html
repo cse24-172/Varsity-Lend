@@ -1,55 +1,611 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101b50"><title>Student Login | Varsity Lend</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b50">
+<title>Student Login | Varsity Lend</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--navy:#101943;--blue:#263fae;--blue2:#4260d5;--yellow:#ffd94f;--ink:#17203b;--muted:#737b91;--pale:#f4f6fc;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff}a{text-decoration:none;color:inherit}
-.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-header{height:78px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #edf0f6}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,Arial,sans-serif;font-weight:800;letter-spacing:-.5px;color:var(--navy);font-size:18px}
-.brand-mark{height:43px;width:43px;border-radius:14px;background:linear-gradient(145deg,#4666e1,#101943);display:grid;place-items:center;color:#fff;font-size:19px}
-.brand small{display:block;font:700 9px Arial,sans-serif;letter-spacing:2px;color:#8991a8;margin-top:2px}
-.navlinks{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.navlinks a{font-size:13px;font-weight:800;padding:11px 15px;border-radius:30px;color:var(--navy)}
-.navlinks a.active,.navlinks a.primary{background:var(--blue);color:white}
-.navlinks a:hover{background:#eef1ff;color:var(--blue)}
-main{min-height:calc(100vh - 150px);background:linear-gradient(180deg,#f7f8fd 0%,#fff 360px);padding:54px 0 70px}
-.page-heading{text-align:center;margin:0 auto 28px;max-width:650px}
-.kicker{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
-h1{font:800 clamp(32px,5vw,46px)/1.12 Manrope,Arial,sans-serif;letter-spacing:-1.5px;margin:12px 0;color:var(--navy)}
-.page-heading p{font-size:15px;line-height:1.7;color:var(--muted);margin:0}
-.panel{background:#fff;border:1px solid #e8ebf4;border-radius:23px;padding:30px;box-shadow:0 15px 45px #1b2c6710;max-width:620px;margin:auto}
-.panel.wide{max-width:900px}
-.panel h2{font:800 22px Manrope,Arial,sans-serif;margin:0 0 7px;color:var(--navy)}
-.sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.field{display:grid;gap:7px}.field.full{grid-column:1/-1}
-label{font-size:12px;font-weight:800;color:#48516a}
-input,select,textarea{width:100%;border:1px solid #dfe3ed;border-radius:11px;padding:13px;font:14px Arial,sans-serif;color:var(--ink);background:#fff}
-input:focus,select:focus,textarea:focus{outline:0;border-color:#6179dc;box-shadow:0 0 0 3px #263fae12}
-textarea{min-height:90px;resize:vertical}
-.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:30px;padding:14px 22px;font-weight:800;font-size:14px;cursor:pointer}
-.btn-yellow{background:var(--yellow);color:#1b2341}.btn-blue{background:var(--blue);color:#fff}.btn-outline{border:1px solid #dce2f6;color:var(--blue);background:#fff}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.note{font-size:11px;line-height:1.6;color:#858da1;margin:16px 0 0}
-footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}
-.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.foot strong{color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
-.tile{border:1px solid #e8ebf4;border-radius:17px;padding:20px;background:#fff}
-.tile small{display:block;color:var(--muted);font-size:12px;margin-bottom:9px}.tile strong{font:800 19px Manrope,Arial,sans-serif;color:var(--navy)}
-@media(max-width:650px){header{height:auto;padding:13px 0}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%;gap:4px}.navlinks a{padding:9px 10px;font-size:12px}main{padding:38px 0 55px}.panel{padding:22px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.tiles{grid-template-columns:1fr}}
-</style></head><body>
-<header><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">Vℒ</span><span>VARSITY LEND<small>STUDENT FUNDING</small></span></a><nav class="navlinks"><a class="" href="index.html">Home</a><a class="primary" href="register.html">Create account</a><a class="active " href="login.html">Student login</a></nav></div></header>
-<main><div class="wrap"><div class="page-heading"><div class="kicker">STUDENT ACCESS</div><h1>Welcome back, student.</h1><p>Sign in to access your Varsity Lend student area.</p></div>
-<section class="panel"><h2>Welcome back</h2><p class="sub">Sign in to continue to your student area.</p>
-<form onsubmit="event.preventDefault();alert('Sign-in will be activated when secure account services are connected.');">
-<div class="fields"><div class="field full"><label for="email">Email address</label><input id="email" type="email" autocomplete="username" required placeholder="Enter your email"></div>
-<div class="field full"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Enter your password"></div></div>
-<div class="btn-row"><button class="btn btn-yellow" type="submit">Sign in</button><a class="btn btn-outline" href="register.html">Create an account</a></div>
-</form></section></div></main>
-<footer><div class="wrap foot"><span><strong>VARSITY LEND</strong> · Quick Student Funding</span><span>Botswana</span><span>© <span id="year"></span> Varsity Lend</span></div></footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-</body></html>
+:root {
+    --navy:#101943;
+    --blue:#263fae;
+    --blue2:#4260d5;
+    --yellow:#ffd94f;
+    --ink:#17203b;
+    --muted:#737b91;
+    --pale:#f4f6fc;
+    --white:#fff;
+    --red:#c62828;
+    --green:#16834b;
+}
+
+* { box-sizing:border-box; }
+
+body {
+    margin:0;
+    font-family:"DM Sans",Arial,sans-serif;
+    color:var(--ink);
+    background:#fff;
+}
+
+a { text-decoration:none; color:inherit; }
+
+.wrap {
+    width:min(1120px,calc(100% - 40px));
+    margin:auto;
+}
+
+header {
+    min-height:78px;
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border-bottom:1px solid #edf0f6;
+}
+
+.nav {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:Manrope,Arial,sans-serif;
+    font-weight:800;
+    letter-spacing:-.5px;
+    color:var(--navy);
+    font-size:18px;
+}
+
+.brand-mark {
+    height:43px;
+    width:43px;
+    border-radius:14px;
+    background:linear-gradient(145deg,#4666e1,#101943);
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-size:19px;
+}
+
+.brand small {
+    display:block;
+    font:700 9px Arial,sans-serif;
+    letter-spacing:2px;
+    color:#8991a8;
+    margin-top:2px;
+}
+
+.navlinks {
+    display:flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.navlinks a {
+    font-size:13px;
+    font-weight:800;
+    padding:11px 15px;
+    border-radius:30px;
+    color:var(--navy);
+}
+
+.navlinks a.active,
+.navlinks a.primary {
+    background:var(--blue);
+    color:white;
+}
+
+.navlinks a:hover {
+    background:#eef1ff;
+    color:var(--blue);
+}
+
+main {
+    min-height:calc(100vh - 150px);
+    background:linear-gradient(180deg,#f7f8fd 0%,#fff 360px);
+    padding:54px 0 70px;
+}
+
+.page-heading {
+    text-align:center;
+    margin:0 auto 28px;
+    max-width:650px;
+}
+
+.kicker {
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--blue);
+}
+
+h1 {
+    font:800 clamp(32px,5vw,46px)/1.12 Manrope,Arial,sans-serif;
+    letter-spacing:-1.5px;
+    margin:12px 0;
+    color:var(--navy);
+}
+
+.page-heading p {
+    font-size:15px;
+    line-height:1.7;
+    color:var(--muted);
+    margin:0;
+}
+
+.panel {
+    background:#fff;
+    border:1px solid #e8ebf4;
+    border-radius:23px;
+    padding:30px;
+    box-shadow:0 15px 45px #1b2c6710;
+    max-width:520px;
+    margin:auto;
+}
+
+.panel h2 {
+    font:800 22px Manrope,Arial,sans-serif;
+    margin:0 0 7px;
+    color:var(--navy);
+}
+
+.sub {
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
+    margin:0 0 22px;
+}
+
+.fields {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:17px;
+}
+
+.field {
+    display:grid;
+    gap:7px;
+}
+
+label {
+    font-size:12px;
+    font-weight:800;
+    color:#48516a;
+}
+
+input {
+    width:100%;
+    border:1px solid #dfe3ed;
+    border-radius:11px;
+    padding:13px;
+    font:14px Arial,sans-serif;
+    color:var(--ink);
+    background:#fff;
+}
+
+input:focus {
+    outline:0;
+    border-color:#6179dc;
+    box-shadow:0 0 0 3px #263fae12;
+}
+
+input.invalid {
+    border-color:var(--red);
+}
+
+.password-wrap {
+    position:relative;
+}
+
+.password-wrap input {
+    padding-right:75px;
+}
+
+.toggle-password {
+    position:absolute;
+    right:9px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    color:var(--blue);
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    padding:8px;
+}
+
+.field-error {
+    color:var(--red);
+    font-size:11px;
+}
+
+.field-error:empty {
+    display:none;
+}
+
+.btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:30px;
+    padding:14px 22px;
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover:not(:disabled) {
+    transform:translateY(-1px);
+}
+
+.btn-yellow {
+    background:var(--yellow);
+    color:#1b2341;
+}
+
+.btn-blue {
+    background:var(--blue);
+    color:#fff;
+}
+
+.btn-outline {
+    border:1px solid #dce2f6;
+    color:var(--blue);
+    background:#fff;
+}
+
+.btn:disabled {
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.btn-row {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:22px;
+}
+
+.btn-row .btn {
+    flex:1;
+}
+
+#loginMessage {
+    display:none;
+    font-size:13px;
+    line-height:1.6;
+    margin-top:18px;
+    padding:13px 15px;
+    border-radius:11px;
+}
+
+#loginMessage.error {
+    display:block;
+    color:#a51e1e;
+    background:#fff0f0;
+    border:1px solid #f4d0d0;
+}
+
+#loginMessage.info {
+    display:block;
+    color:#29468e;
+    background:#eef2ff;
+    border:1px solid #d9e1ff;
+}
+
+#loginMessage.success {
+    display:block;
+    color:#126b3b;
+    background:#eaf8f0;
+    border:1px solid #c9ecd7;
+}
+
+.register-prompt {
+    text-align:center;
+    margin:22px 0 0;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.register-prompt a {
+    color:var(--blue);
+    font-weight:800;
+}
+
+.note {
+    font-size:11px;
+    line-height:1.6;
+    color:#858da1;
+    margin:16px 0 0;
+}
+
+footer {
+    background:#0b1438;
+    color:#aeb9df;
+    padding:23px 0;
+    font-size:11px;
+}
+
+.foot {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.foot strong { color:#fff; }
+
+@media(max-width:650px) {
+    header { padding:13px 0; }
+
+    .nav {
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .navlinks {
+        width:100%;
+        gap:4px;
+    }
+
+    .navlinks a {
+        padding:9px 10px;
+        font-size:12px;
+    }
+
+    main { padding:38px 0 55px; }
+
+    .panel { padding:22px; }
+
+    .btn-row {
+        flex-direction:column;
+    }
+
+    .btn-row .btn {
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="wrap nav">
+
+        <a class="brand" href="index.html">
+            <span class="brand-mark">Vℒ</span>
+            <span>
+                VARSITY LEND
+                <small>STUDENT FUNDING</small>
+            </span>
+        </a>
+
+        <nav class="navlinks">
+            <a href="index.html">Home</a>
+            <a class="primary" href="register.html">Create account</a>
+            <a class="active" href="login.html">Student login</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+<div class="wrap">
+
+    <div class="page-heading">
+        <div class="kicker">STUDENT ACCESS</div>
+        <h1>Welcome back, student.</h1>
+        <p>Sign in to access your Varsity Lend student area.</p>
+    </div>
+
+    <section class="panel">
+
+        <h2>Welcome back</h2>
+        <p class="sub">Enter your account details to continue.</p>
+
+        <form id="loginForm" novalidate>
+
+            <div class="fields">
+
+                <div class="field">
+                    <label for="email">Email address</label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autocomplete="username"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <span class="field-error" id="emailError"></span>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+
+                    <div class="password-wrap">
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            class="toggle-password"
+                            type="button"
+                            id="togglePassword"
+                        >Show</button>
+                    </div>
+
+                    <span class="field-error" id="passwordError"></span>
+                </div>
+
+            </div>
+
+            <div class="btn-row">
+                <button class="btn btn-yellow" id="loginButton" type="submit">
+                    Sign in
+                </button>
+
+                <a class="btn btn-outline" href="register.html">
+                    Create an account
+                </a>
+            </div>
+
+        </form>
+
+        <div id="loginMessage" role="status" aria-live="polite"></div>
+
+        <p class="register-prompt">
+            New to Varsity Lend?
+            <a href="register.html">Create your student account</a>
+        </p>
+
+        <p class="note">
+            Your student account gives you access to your funding information
+            and application dashboard.
+        </p>
+
+    </section>
+
+</div>
+</main>
+
+<footer>
+    <div class="wrap foot">
+        <span><strong>VARSITY LEND</strong> · Quick Student Funding</span>
+        <span>Botswana</span>
+        <span>© <span id="year"></span> Varsity Lend</span>
+    </div>
+</footer>
+
+<script>
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+const loginForm = document.getElementById("loginForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginButton = document.getElementById("loginButton");
+const loginMessage = document.getElementById("loginMessage");
+
+const togglePassword = document.getElementById("togglePassword");
+
+// Show and hide password.
+togglePassword.addEventListener("click", function() {
+    const showing = passwordInput.type === "text";
+
+    passwordInput.type = showing ? "password" : "text";
+    togglePassword.textContent = showing ? "Show" : "Hide";
+});
+
+// Inline messages.
+function showMessage(message, type) {
+    loginMessage.textContent = message;
+    loginMessage.className = type;
+}
+
+function clearMessage() {
+    loginMessage.textContent = "";
+    loginMessage.className = "";
+}
+
+// Clear field errors while typing.
+emailInput.addEventListener("input", function() {
+    document.getElementById("emailError").textContent = "";
+    emailInput.classList.remove("invalid");
+    clearMessage();
+});
+
+passwordInput.addEventListener("input", function() {
+    document.getElementById("passwordError").textContent = "";
+    passwordInput.classList.remove("invalid");
+    clearMessage();
+});
+
+// Login form validation.
+loginForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    clearMessage();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    let valid = true;
+
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+
+    emailInput.classList.remove("invalid");
+    passwordInput.classList.remove("invalid");
+
+    if (!email) {
+        document.getElementById("emailError").textContent =
+            "Please enter your email address.";
+
+        emailInput.classList.add("invalid");
+        valid = false;
+
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById("emailError").textContent =
+            "Please enter a valid email address.";
+
+        emailInput.classList.add("invalid");
+        valid = false;
+    }
+
+    if (!password) {
+        document.getElementById("passwordError").textContent =
+            "Please enter your password.";
+
+        passwordInput.classList.add("invalid");
+        valid = false;
+    }
+
+    if (!valid) {
+        showMessage(
+            "Please correct the highlighted fields.",
+            "error"
+        );
+
+        if (emailInput.classList.contains("invalid")) {
+            emailInput.focus();
+        } else {
+            passwordInput.focus();
+        }
+
+        return;
+    }
+
+    showMessage(
+        "Your details are valid. Secure sign-in is the next connection to implement.",
+        "info"
+    );
+});
+</script>
+
+</body>
+</html>

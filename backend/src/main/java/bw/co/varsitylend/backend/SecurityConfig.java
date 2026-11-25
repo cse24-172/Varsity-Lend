@@ -10,12 +10,18 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
+
+    @Bean
+    public HttpSessionSecurityContextRepository securityContextRepository() {
+        return new HttpSessionSecurityContextRepository();
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -47,14 +53,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http) throws Exception {
+            HttpSecurity http,
+            HttpSessionSecurityContextRepository securityContextRepository)
+            throws Exception {
 
         http
             .cors(Customizer.withDefaults())
 
             // Temporary during integration.
-            // Restore CSRF protection before production deployment.
+            // CSRF protection must be restored before production.
             .csrf(csrf -> csrf.disable())
+
+            .securityContext(context -> context
+                .securityContextRepository(securityContextRepository)
+            )
 
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/auth/admin")
@@ -103,5 +104,30 @@ public class AdminAuthenticationController {
         String password
     ) {
     }
+    @GetMapping("/session")
+public ResponseEntity<Map<String, Object>> checkSession() {
+
+    var authentication =
+        SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null
+            || !authentication.isAuthenticated()
+            || authentication.getAuthorities().stream()
+                .noneMatch(authority ->
+                    authority.getAuthority().equals("ROLE_ADMIN"))) {
+
+        return ResponseEntity
+            .status(HttpStatus.UNAUTHORIZED)
+            .body(Map.of("authenticated", false));
+    }
+
+    return ResponseEntity.ok(
+        Map.of(
+            "authenticated", true,
+            "role", "ADMIN",
+            "email", authentication.getName()
+        )
+    );
+}
 }
 

@@ -82,11 +82,12 @@ public class SecurityConfig {
                 ).permitAll()
 
                 .requestMatchers(
-                    HttpMethod.GET,
-                    "/",
-                    "/api/health",
-                    "/api/database-check"
-                ).permitAll()
+    HttpMethod.GET,
+    "/",
+    "/api/health",
+    "/api/database-check",
+    "/api/auth/admin/session"
+).permitAll()
 
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 

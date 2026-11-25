@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +43,17 @@
     .btn-yellow{background:var(--yellow);color:#1b2341;box-shadow:0 9px 24px #0002}
     .btn-ghost{border:1px solid #ffffff70;color:#fff}
     .tiny{margin-top:20px;font-size:11px;color:#c4cefa}
-    .promo{background:#fff;color:var(--ink);border-radius:27px;padding:29px;max-width:405px;width:100%;justify-self:end;box-shadow:0 25px 70px #030a2d66;transform:rotate(1deg)}
+   .promo{
+  background:#fff;
+  color:var(--ink);
+  border-radius:27px;
+  padding:29px;
+  max-width:405px;
+  width:100%;
+  justify-self:end;
+  box-shadow:0 25px 70px #030a2d66;
+  transform:none;
+}
     .promo-top{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#7c8499;font-weight:800;letter-spacing:.7px}
     .promo-logo{display:flex;align-items:center;gap:8px;color:var(--blue);font-size:13px}
     .promo-logo b{background:var(--blue);color:#fff;width:30px;height:30px;border-radius:9px;display:grid;place-items:center}
@@ -79,8 +90,10 @@
     .form-note{font-size:10px!important;color:#9299aa!important;line-height:1.5;margin:14px 0!important}
     .submit{width:100%;border:0;cursor:pointer}
     footer{background:#0b1438;color:#aeb9df;padding:23px 0;font-size:11px}
-    .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .foot strong{color:#fff}
+    .admin-link{color:#dce3ff;font-weight:700;padding:8px 12px;border:1px solid #ffffff35;border-radius:20px;transition:.2s}
+    .admin-link:hover{background:#ffffff15;color:#fff;border-color:#ffffff80}
     .whatsapp{position:fixed;right:20px;bottom:20px;height:55px;width:55px;border-radius:50%;background:#20c66b;color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 10px 25px #064c2c55;z-index:10}
     @media(max-width:760px){
       .hero-grid{grid-template-columns:1fr;min-height:auto;padding:60px 0;gap:38px}
@@ -107,7 +120,7 @@
       .form-card{padding:21px}
       .fields{grid-template-columns:1fr}
       .field.full{grid-column:auto}
-      .foot{flex-direction:column}
+      .foot{flex-direction:column;align-items:flex-start}
     }
   </style>
 </head>
@@ -192,6 +205,7 @@
     <div class="wrap foot">
       <span><strong>VARSITY LEND</strong> · Quick Student Funding</span>
       <span>WhatsApp: +267 729 583 14</span>
+      <a class="admin-link" href="admin-login.html">Admin Portal →</a>
       <span>© <span id="year"></span> Varsity Lend</span>
     </div>
   </footer>
@@ -241,7 +255,6 @@
       enquiryMessage.style.color = '#15985a';
       enquiryMessage.textContent = 'Taking you to WhatsApp to send your enquiry.';
 
-      // Continue in the same tab: no popup window and no interrupting alert.
       window.location.href = 'https://wa.me/26772958314?text=' + encodeURIComponent(message);
     });
   </script>

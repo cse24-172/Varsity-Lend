@@ -25,10 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminAuthenticationController {
 
     private final AdminAuthenticationService authenticationService;
+    private final HttpSessionSecurityContextRepository securityContextRepository;
 
     public AdminAuthenticationController(
-            AdminAuthenticationService authenticationService) {
+            AdminAuthenticationService authenticationService,
+            HttpSessionSecurityContextRepository securityContextRepository) {
+
         this.authenticationService = authenticationService;
+        this.securityContextRepository = securityContextRepository;
     }
 
     @PostMapping("/login")
@@ -43,7 +47,6 @@ public class AdminAuthenticationController {
                 loginRequest.password()
             );
 
-            // Create an authenticated administrator identity.
             UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(
                     admin.getEmail(),
@@ -51,22 +54,23 @@ public class AdminAuthenticationController {
                     List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
                 );
 
-            // Create and store the security context.
             SecurityContext context =
                 SecurityContextHolder.createEmptyContext();
 
             context.setAuthentication(authentication);
             SecurityContextHolder.setContext(context);
 
-            // Create a session and protect against session fixation.
+            // Create a new session and prevent session fixation.
             request.getSession(true);
             request.changeSessionId();
 
-            // Explicitly save authentication in the HTTP session.
-            HttpSessionSecurityContextRepository repository =
-                new HttpSessionSecurityContextRepository();
-
-            repository.saveContext(context, request, response);
+            // Save authentication using the same repository
+            // configured in the Spring Security filter chain.
+            securityContextRepository.saveContext(
+                context,
+                request,
+                response
+            );
 
             return ResponseEntity.ok(
                 Map.of(
@@ -100,3 +104,4 @@ public class AdminAuthenticationController {
     ) {
     }
 }
+

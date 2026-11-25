@@ -6,6 +6,7 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +16,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/auth/admin")
 public class AdminAuthenticationController {
 
     private final AdminAuthenticationService authenticationService;
+
     private final HttpSessionSecurityContextRepository securityContextRepository;
 
     public AdminAuthenticationController(
@@ -35,6 +37,8 @@ public class AdminAuthenticationController {
         this.authenticationService = authenticationService;
         this.securityContextRepository = securityContextRepository;
     }
+
+    // ADMIN LOGIN
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(
@@ -65,8 +69,7 @@ public class AdminAuthenticationController {
             request.getSession(true);
             request.changeSessionId();
 
-            // Save authentication using the same repository
-            // configured in the Spring Security filter chain.
+            // Save authentication in the HTTP session.
             securityContextRepository.saveContext(
                 context,
                 request,
@@ -99,35 +102,62 @@ public class AdminAuthenticationController {
         }
     }
 
+    // VERIFY ADMIN SESSION
+
+    @GetMapping("/session")
+    public ResponseEntity<Map<String, Object>> checkSession() {
+
+        var authentication =
+            SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null
+                || !authentication.isAuthenticated()
+                || authentication.getAuthorities().stream()
+                    .noneMatch(authority ->
+                        authority.getAuthority().equals("ROLE_ADMIN"))) {
+
+            return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("authenticated", false));
+        }
+
+        return ResponseEntity.ok(
+            Map.of(
+                "authenticated", true,
+                "role", "ADMIN",
+                "email", authentication.getName()
+            )
+        );
+    }
+
+    // ADMIN LOGOUT
+
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, Object>> logout(
+            HttpServletRequest request) {
+
+        // Clear Spring Security authentication.
+        SecurityContextHolder.clearContext();
+
+        // Invalidate the current administrator session.
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok(
+            Map.of(
+                "message",
+                "Administrator logged out successfully."
+            )
+        );
+    }
+
     public record AdminLoginRequest(
         String email,
         String password
     ) {
     }
-    @GetMapping("/session")
-public ResponseEntity<Map<String, Object>> checkSession() {
-
-    var authentication =
-        SecurityContextHolder.getContext().getAuthentication();
-
-    if (authentication == null
-            || !authentication.isAuthenticated()
-            || authentication.getAuthorities().stream()
-                .noneMatch(authority ->
-                    authority.getAuthority().equals("ROLE_ADMIN"))) {
-
-        return ResponseEntity
-            .status(HttpStatus.UNAUTHORIZED)
-            .body(Map.of("authenticated", false));
-    }
-
-    return ResponseEntity.ok(
-        Map.of(
-            "authenticated", true,
-            "role", "ADMIN",
-            "email", authentication.getName()
-        )
-    );
-}
 }
 

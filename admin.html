@@ -4,574 +4,539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#102b5c">
-<meta name="description" content="Varsity Lend administrator management dashboard.">
+<meta name="theme-color" content="#101943">
+<meta name="description" content="Varsity Lend administrator dashboard.">
 <title>Admin Dashboard | Varsity Lend</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --navy: #102b5c;
-    --blue: #174a91;
-    --yellow: #f5c542;
-    --bg: #f4f6fa;
-    --ink: #17243a;
-    --muted: #718096;
-    --line: #e7ebf2;
-    --white: #fff;
-    --green: #16845b;
-    --red: #c44848;
+    --navy:#101943;
+    --navy-light:#192957;
+    --blue:#3155c8;
+    --yellow:#ffd94f;
+    --bg:#f5f7fb;
+    --white:#fff;
+    --ink:#17233d;
+    --muted:#778198;
+    --line:#e9edf4;
+    --green:#16845b;
+    --red:#c44848;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing:border-box; }
 
 body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "DM Sans", Arial, sans-serif;
+    margin:0;
+    font-family:"DM Sans",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
 }
 
-button, input, select {
-    font: inherit;
-}
-
-a {
-    text-decoration: none;
-}
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+a { text-decoration:none; }
 
 .layout {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:250px minmax(0,1fr);
 }
 
 /* SIDEBAR */
 
-aside {
-    background: var(--navy);
-    color: #fff;
-    padding: 25px 18px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.sidebar {
+    background:var(--navy);
+    color:white;
+    padding:28px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
 }
 
 .brand {
-    font-family: Manrope, Arial, sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 1px;
-    padding: 5px 10px;
-    color: white;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:white;
+    padding:0 8px;
+    font:800 19px Manrope,Arial,sans-serif;
+    letter-spacing:.3px;
+}
+
+.brand-mark {
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:linear-gradient(145deg,#496be5,#263fae);
+    color:white;
+    font-size:19px;
 }
 
 .brand small {
-    display: block;
-    color: #c7d5ec;
-    font-size: 10px;
-    letter-spacing: 2px;
-    margin-top: 5px;
+    display:block;
+    font:700 9px "DM Sans",Arial,sans-serif;
+    color:#aab9da;
+    letter-spacing:2px;
+    margin-top:4px;
 }
 
-.admin-tag {
-    margin: 28px 10px 16px;
-    padding: 12px;
-    border: 1px solid #45618a;
-    border-radius: 10px;
-    background: #18396f;
-    font-size: 12px;
-    color: #d9e4f5;
+.sidebar-label {
+    margin:42px 12px 13px;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.6px;
+    color:#8193b8;
 }
 
-.admin-tag strong {
-    display: block;
-    color: white;
-    font-size: 14px;
-    margin-bottom: 4px;
+.nav {
+    display:grid;
+    gap:7px;
 }
 
-nav {
-    display: grid;
-    gap: 7px;
+.nav a {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:#c7d2e8;
+    padding:13px 14px;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:600;
+    transition:.2s;
 }
 
-nav a {
-    color: #dce6f5;
-    padding: 12px 13px;
-    border-radius: 8px;
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    transition: .2s;
+.nav a:hover,
+.nav a.active {
+    background:#263f78;
+    color:white;
 }
 
-nav a.active,
-nav a:hover {
-    background: #234b86;
-    color: #fff;
+.nav a.active {
+    border-left:3px solid var(--yellow);
+    padding-left:11px;
 }
 
-nav a.active {
-    border-left: 3px solid var(--yellow);
+.nav-icon {
+    width:20px;
+    text-align:center;
+    font-size:17px;
 }
 
 .sidebar-bottom {
-    margin-top: auto;
-    padding: 18px 10px 4px;
-    color: #aebed6;
-    font-size: 11px;
-    line-height: 1.7;
+    margin-top:auto;
+    border-top:1px solid #293b67;
+    padding:19px 9px 0;
+    color:#93a4c7;
+    font-size:11px;
+    line-height:1.8;
 }
 
 /* MAIN */
 
-main {
-    min-width: 0;
-}
+main { min-width:0; }
 
 .topbar {
-    min-height: 76px;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 34px;
+    min-height:76px;
+    background:white;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:0 32px;
 }
 
 .topbar h1 {
-    font: 800 19px Manrope, Arial, sans-serif;
-    margin: 0;
-    color: var(--navy);
+    margin:0;
+    color:var(--navy);
+    font:800 19px Manrope,Arial,sans-serif;
 }
 
-.top-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--muted);
+.top-actions {
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.profile {
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #e8effa;
-    color: var(--navy);
-    display: grid;
-    place-items: center;
-    font-weight: 700;
+    width:39px;
+    height:39px;
+    border-radius:50%;
+    background:#eaf0ff;
+    color:var(--blue);
+    display:grid;
+    place-items:center;
+    font-weight:800;
 }
+
+.profile-info strong {
+    display:block;
+    color:var(--navy);
+    font-size:12px;
+}
+
+.profile-info small {
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.logout-btn {
+    border:1px solid #f0d8d8;
+    background:#fff;
+    color:#b33e3e;
+    border-radius:9px;
+    padding:10px 15px;
+    font-size:12px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.logout-btn:hover {
+    background:#fff1f1;
+}
+
+/* CONTENT */
 
 .content {
-    padding: 30px 34px;
-    max-width: 1500px;
-    margin: auto;
-}
-
-.page-section {
-    scroll-margin-top: 95px;
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+    padding:32px;
 }
 
 .welcome {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:27px;
 }
 
 .welcome h2 {
-    margin: 0 0 7px;
-    font: 800 25px Manrope, Arial, sans-serif;
-    color: var(--navy);
+    margin:0 0 7px;
+    color:var(--navy);
+    font:800 25px Manrope,Arial,sans-serif;
 }
 
 .welcome p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
 }
 
-.date {
-    font-size: 12px;
-    color: var(--muted);
-    padding-top: 7px;
+.date-label {
+    color:var(--muted);
+    font-size:12px;
+    padding-top:7px;
 }
 
-/* NOTICE */
-
-.notice {
-    display: flex;
-    gap: 13px;
-    align-items: flex-start;
-    background: #fff9e7;
-    border: 1px solid #f3e3ad;
-    border-radius: 11px;
-    padding: 15px;
-    margin-bottom: 23px;
-}
-
-.notice-icon {
-    height: 30px;
-    width: 30px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #f7e9b9;
-    color: #765d16;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-}
-
-.notice strong {
-    display: block;
-    color: #765d16;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.notice p {
-    color: #806b36;
-    font-size: 12px;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* STATISTICS */
+/* STATS */
 
 .stats {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 25px;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:17px;
+    margin-bottom:28px;
 }
 
 .stat {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 13px;
-    padding: 19px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:20px;
+    box-shadow:0 3px 12px #17233d05;
 }
 
 .stat-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--muted);
-    font-size: 12px;
-    gap: 8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:600;
 }
 
 .stat-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background: #edf3fc;
-    display: grid;
-    place-items: center;
-    color: var(--blue);
-    font-size: 17px;
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:#edf2ff;
+    color:var(--blue);
+    font-size:17px;
 }
 
 .stat strong {
-    display: block;
-    font: 800 27px Manrope, Arial, sans-serif;
-    color: var(--navy);
-    margin: 14px 0 5px;
+    display:block;
+    color:var(--navy);
+    font:800 28px Manrope,Arial,sans-serif;
+    margin:15px 0 5px;
 }
 
 .stat small {
-    font-size: 11px;
-    color: var(--muted);
+    color:var(--muted);
+    font-size:11px;
 }
 
 /* PANELS */
 
 .panel {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 13px;
-    overflow: hidden;
-    margin-bottom: 22px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:13px;
+    overflow:hidden;
+    margin-bottom:23px;
+    box-shadow:0 3px 12px #17233d05;
+    scroll-margin-top:20px;
 }
 
 .panel-head {
-    padding: 19px 21px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--line);
+    padding:20px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
 }
 
 .panel-head h3 {
-    margin: 0;
-    font: 800 16px Manrope, Arial, sans-serif;
-    color: var(--navy);
+    margin:0;
+    color:var(--navy);
+    font:800 15px Manrope,Arial,sans-serif;
 }
 
 .panel-head p {
-    margin: 5px 0 0;
-    color: var(--muted);
-    font-size: 12px;
+    margin:5px 0 0;
+    color:var(--muted);
+    font-size:11px;
 }
-
-/* TOOLS */
 
 .tools {
-    display: flex;
-    gap: 9px;
-    align-items: center;
+    display:flex;
+    gap:9px;
+    align-items:center;
 }
 
-.search,
-.filter {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 10px 11px;
-    background: #fff;
-    color: var(--ink);
-    outline: none;
-    font-size: 12px;
+.search,.filter {
+    border:1px solid #dfe5ef;
+    border-radius:8px;
+    background:white;
+    color:var(--ink);
+    padding:10px 12px;
+    font-size:12px;
+    outline:none;
 }
 
-.search {
-    width: 230px;
+.search { width:230px; }
+
+.search:focus,.filter:focus {
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px #3155c815;
 }
 
-.search:focus,
-.filter:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px #174a9110;
-}
-
-/* TABLE */
-
-.table-wrap {
-    overflow-x: auto;
-}
+.table-wrap { overflow-x:auto; }
 
 table {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 720px;
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
 }
 
-th,
-td {
-    text-align: left;
-    padding: 14px 20px;
-    border-bottom: 1px solid #edf0f5;
-    font-size: 12px;
+th,td {
+    padding:15px 20px;
+    text-align:left;
+    border-bottom:1px solid #edf0f5;
+    font-size:12px;
 }
 
 th {
-    color: var(--muted);
-    font-weight: 700;
-    background: #fbfcfe;
+    background:#fafbfe;
+    color:var(--muted);
+    font-size:10px;
+    letter-spacing:.6px;
+    font-weight:800;
 }
 
-td {
-    color: #344258;
-}
+td { color:#39465d; }
 
-.student {
-    font-weight: 700;
-    color: var(--navy);
+.student-name {
+    display:block;
+    color:var(--navy);
+    font-weight:700;
 }
 
 .sub {
-    display: block;
-    color: #8994a5;
-    font-size: 11px;
-    margin-top: 4px;
+    display:block;
+    color:#8994a5;
+    font-size:10px;
+    margin-top:4px;
 }
 
-/* EMPTY STATE */
+.status {
+    display:inline-block;
+    border-radius:20px;
+    padding:5px 10px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.status.Pending { background:#fff5d9;color:#87640a; }
+.status.Approved { background:#e7f7ef;color:#16845b; }
+.status.Rejected { background:#fff0f0;color:#c44848; }
+
+/* EMPTY STATES */
 
 .empty {
-    padding: 45px 20px;
-    text-align: center;
-    color: var(--muted);
+    padding:45px 20px;
+    text-align:center;
+    color:var(--muted);
 }
 
 .empty-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: #edf3fc;
-    color: var(--blue);
-    display: grid;
-    place-items: center;
-    font-size: 22px;
-    font-weight: 800;
-    margin: 0 auto 14px;
+    width:48px;
+    height:48px;
+    margin:0 auto 13px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    background:#edf2ff;
+    color:var(--blue);
+    font-size:22px;
 }
 
 .empty strong {
-    display: block;
-    color: var(--navy);
-    font-size: 14px;
-    margin-bottom: 7px;
+    display:block;
+    color:var(--navy);
+    font-size:13px;
+    margin-bottom:7px;
 }
 
 .empty p {
-    max-width: 390px;
-    margin: auto;
-    font-size: 12px;
-    line-height: 1.7;
+    max-width:400px;
+    margin:auto;
+    font-size:11px;
+    line-height:1.7;
 }
 
-/* STUDENT SECTION */
-
-.student-info {
-    padding: 22px;
-}
+.student-info { padding:25px; }
 
 .student-info h4 {
-    color: var(--navy);
-    margin: 0 0 8px;
-    font-size: 14px;
+    margin:0 0 8px;
+    color:var(--navy);
+    font-size:14px;
 }
 
 .student-info p {
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--muted);
-    margin: 0;
+    max-width:650px;
+    margin:0;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
 }
-
-/* INLINE FEEDBACK */
 
 .feedback {
-    display: none;
-    padding: 13px 15px;
-    margin: 15px 20px;
-    border-radius: 9px;
-    font-size: 12px;
-    line-height: 1.6;
+    display:none;
+    margin:15px 20px;
+    padding:12px 14px;
+    border-radius:9px;
+    font-size:12px;
 }
 
-.feedback.show {
-    display: block;
-}
-
-.feedback.info {
-    color: #315184;
-    background: #edf3fc;
-    border: 1px solid #d5e2f4;
-}
-
-/* FOOTER */
+.feedback.show { display:block; }
+.feedback.info { background:#edf3fc;color:#315184; }
+.feedback.error { background:#fff0f0;color:#a52e2e; }
 
 footer {
-    padding: 20px 34px;
-    color: var(--muted);
-    font-size: 11px;
+    padding:20px 32px;
+    color:var(--muted);
+    font-size:11px;
 }
 
 /* RESPONSIVE */
 
-@media(max-width: 1000px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        min-height: auto;
-        padding: 15px 18px;
-    }
-
-    .admin-tag,
-    .sidebar-bottom {
-        display: none;
-    }
-
-    nav {
-        display: flex;
-        overflow-x: auto;
-        margin-top: 13px;
-    }
-
-    nav a {
-        white-space: nowrap;
-        padding: 10px;
-    }
-
-    .topbar {
-        min-height: 62px;
-        padding: 0 20px;
-    }
-
-    .content {
-        padding: 22px 20px;
-    }
+@media(max-width:1100px) {
+    .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 
-@media(max-width: 800px) {
-    .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+@media(max-width:850px) {
+    .layout { grid-template-columns:1fr; }
+
+    .sidebar {
+        min-height:auto;
+        padding:15px 18px;
     }
+
+    .sidebar-label,.sidebar-bottom { display:none; }
+
+    .nav {
+        display:flex;
+        overflow-x:auto;
+        margin-top:15px;
+        gap:7px;
+    }
+
+    .nav a { white-space:nowrap; }
+
+    .topbar { padding:0 20px; }
+    .content { padding:24px 20px; }
+}
+
+@media(max-width:600px) {
+    .topbar { min-height:68px; }
+    .topbar h1 { font-size:16px; }
+
+    .profile-info { display:none; }
+    .top-actions { gap:9px; }
+
+    .logout-btn { padding:9px 11px; }
+
+    .content { padding:21px 14px; }
+
+    .welcome h2 { font-size:21px; }
+    .date-label { display:none; }
+
+    .stats { gap:10px; }
+
+    .stat { padding:14px; }
+    .stat strong { font-size:23px; }
+    .stat-top { font-size:10px; }
 
     .panel-head {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items:stretch;
+        flex-direction:column;
+        padding:17px;
     }
 
     .tools {
-        width: 100%;
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
     }
 
-    .search {
-        flex: 1;
-        width: 100%;
-    }
+    .search,.filter { width:100%; }
+
+    footer { padding:18px 14px; }
 }
 
-@media(max-width: 480px) {
-    .stats {
-        gap: 9px;
-    }
-
-    .stat {
-        padding: 14px;
-    }
-
-    .stat strong {
-        font-size: 23px;
-    }
-
-    .welcome h2 {
-        font-size: 21px;
-    }
-
-    .date {
-        display: none;
-    }
-
-    .top-right span {
-        display: none;
-    }
-
-    .tools {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter {
-        width: 100%;
-    }
-
-    footer {
-        padding: 18px 20px;
-    }
+@media(max-width:360px) {
+    .stats { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -580,31 +545,26 @@ footer {
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
-
-    <aside>
-
+    <aside class="sidebar">
         <a href="index.html" class="brand">
-            VARSITY LEND
-            <small>STUDENT FUNDING</small>
+            <span class="brand-mark">Vℒ</span>
+            <span>
+                VARSITY LEND
+                <small>STUDENT FUNDING</small>
+            </span>
         </a>
 
-        <div class="admin-tag">
-            <strong>Administrator</strong>
-            Management workspace
-        </div>
+        <div class="sidebar-label">WORKSPACE</div>
 
-        <nav>
+        <nav class="nav">
             <a href="#overview" class="active" data-section="overview">
-                <span>▦</span> Overview
+                <span class="nav-icon">▦</span> Overview
             </a>
-
             <a href="#applications" data-section="applications">
-                <span>▤</span> Applications
+                <span class="nav-icon">▤</span> Applications
             </a>
-
             <a href="#students" data-section="students">
-                <span>♙</span> Students
+                <span class="nav-icon">♙</span> Students
             </a>
         </nav>
 
@@ -613,44 +573,39 @@ footer {
             Private management area<br><br>
             © <span id="sidebarYear"></span> Varsity Lend
         </div>
-
     </aside>
 
-    <!-- MAIN CONTENT -->
-
     <main>
-
         <header class="topbar">
             <h1>Admin Dashboard</h1>
 
-            <div class="top-right">
-                <span>Administrator</span>
-                <div class="avatar">A</div>
+            <div class="top-actions">
+                <div class="profile">
+                    <div class="avatar" id="avatar">A</div>
+                    <div class="profile-info">
+                        <strong id="adminName">Administrator</strong>
+                        <small id="adminEmail">Verifying session...</small>
+                    </div>
+                </div>
+
+                <button class="logout-btn" id="logoutButton" type="button">
+                    ↪ Logout
+                </button>
             </div>
         </header>
 
         <section class="content">
 
-            <!-- OVERVIEW -->
-
-            <section class="page-section" id="overview">
-
+            <section id="overview">
                 <div class="welcome">
                     <div>
                         <h2>Welcome back, Admin</h2>
                         <p>Here's an overview of your student funding activity.</p>
                     </div>
-
-                    <div class="date">Management overview</div>
+                    <div class="date-label">Management overview</div>
                 </div>
-
-               
-                </div>
-
-                <!-- STATISTICS -->
 
                 <div class="stats">
-
                     <div class="stat">
                         <div class="stat-top">
                             Total applications
@@ -686,15 +641,10 @@ footer {
                         <strong id="rejectedCount">0</strong>
                         <small>Marked as rejected</small>
                     </div>
-
                 </div>
-
             </section>
 
-            <!-- APPLICATIONS -->
-
-            <section class="panel page-section" id="applications">
-
+            <section class="panel" id="applications">
                 <div class="panel-head">
                     <div>
                         <h3>Student applications</h3>
@@ -702,22 +652,18 @@ footer {
                     </div>
 
                     <div class="tools">
-
-                        <input
-                            class="search"
-                            id="searchInput"
+                        <input class="search" id="searchInput"
                             type="search"
                             placeholder="Search student or institution..."
-                            aria-label="Search applications"
-                        >
+                            aria-label="Search applications">
 
-                        <select class="filter" id="statusFilter" aria-label="Filter applications">
+                        <select class="filter" id="statusFilter"
+                            aria-label="Filter applications">
                             <option value="all">All statuses</option>
                             <option value="Pending">Pending</option>
                             <option value="Approved">Approved</option>
                             <option value="Rejected">Rejected</option>
                         </select>
-
                     </div>
                 </div>
 
@@ -732,7 +678,6 @@ footer {
                                 <th>STATUS</th>
                             </tr>
                         </thead>
-
                         <tbody id="applicationRows"></tbody>
                     </table>
                 </div>
@@ -741,19 +686,16 @@ footer {
                     <div class="empty-icon">▤</div>
                     <strong id="emptyTitle">No applications available</strong>
                     <p id="emptyDescription">
-                        Student applications will appear here when the secure
-                        application service is connected.
+                        Applications will appear here when application records
+                        are connected to the dashboard.
                     </p>
                 </div>
 
-                <div class="feedback info" id="applicationFeedback" role="status" aria-live="polite"></div>
-
+                <div class="feedback" id="applicationFeedback"
+                    role="status" aria-live="polite"></div>
             </section>
 
-            <!-- STUDENTS -->
-
-            <section class="panel page-section" id="students">
-
+            <section class="panel" id="students">
                 <div class="panel-head">
                     <div>
                         <h3>Student management</h3>
@@ -763,15 +705,12 @@ footer {
 
                 <div class="student-info">
                     <div class="empty-icon">♙</div>
-                    <h4>Student records are not connected</h4>
+                    <h4>Student records</h4>
                     <p>
-                        Registered student accounts will appear here after the
-                        administrator service is connected to the student database.
-                        Student profile management and account actions are not
-                        available in this preview.
+                        Student account records will appear here once the
+                        administrator student-management service is connected.
                     </p>
                 </div>
-
             </section>
 
         </section>
@@ -779,23 +718,94 @@ footer {
         <footer>
             VARSITY LEND · Administrator workspace · Botswana
         </footer>
-
     </main>
-
 </div>
 
 <script>
-/* YEAR */
+const API_BASE_URL =
+    "https://redesigned-adventure-jj64wq54r67cp76-8080.app.github.dev";
 
-const currentYear = new Date().getFullYear();
+document.getElementById("sidebarYear").textContent =
+    new Date().getFullYear();
 
-document.getElementById("sidebarYear").textContent = currentYear;
+/* VERIFY ADMIN SESSION */
 
-/* APPLICATION DATA */
+async function verifyAdminSession() {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/auth/admin/session`,
+            {
+                method:"GET",
+                credentials:"include",
+                headers:{ "Accept":"application/json" }
+            }
+        );
+
+        if (!response.ok) {
+            window.location.replace("admin-login.html");
+            return;
+        }
+
+        const admin = await response.json();
+
+        if (!admin.authenticated || admin.role !== "ADMIN") {
+            window.location.replace("admin-login.html");
+            return;
+        }
+
+        const email = admin.email || "Administrator";
+
+        document.getElementById("adminEmail").textContent = email;
+        document.getElementById("avatar").textContent =
+            email.charAt(0).toUpperCase();
+
+    } catch (error) {
+        console.error("Session verification failed:", error);
+        document.getElementById("adminEmail").textContent =
+            "Connection unavailable";
+        window.location.replace("admin-login.html");
+    }
+}
+
+/* LOGOUT */
+
+document.getElementById("logoutButton").addEventListener("click", async () => {
+    const button = document.getElementById("logoutButton");
+
+    if (!confirm("Are you sure you want to log out?")) {
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Logging out...";
+
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/auth/admin/logout`,
+            {
+                method:"POST",
+                credentials:"include",
+                headers:{ "Accept":"application/json" }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("The server could not complete logout.");
+        }
+
+        window.location.replace("admin-login.html");
+
+    } catch (error) {
+        console.error("Logout failed:", error);
+        alert("Logout could not be completed. Please try again.");
+        button.disabled = false;
+        button.textContent = "↪ Logout";
+    }
+});
+
+/* APPLICATIONS */
 
 const applications = [];
-
-/* ELEMENTS */
 
 const searchInput = document.getElementById("searchInput");
 const statusFilter = document.getElementById("statusFilter");
@@ -804,91 +814,76 @@ const emptyState = document.getElementById("emptyState");
 const emptyTitle = document.getElementById("emptyTitle");
 const emptyDescription = document.getElementById("emptyDescription");
 
-/* RENDER APPLICATIONS */
-
 function renderApplications() {
-
     const query = searchInput.value.trim().toLowerCase();
     const filter = statusFilter.value;
 
-    const filteredApplications = applications.filter(application => {
-
+    const filtered = applications.filter(application => {
         const matchesStatus =
             filter === "all" || application.status === filter;
 
-        const searchableText = [
+        const searchable = [
             application.name,
             application.email,
             application.institution
         ].join(" ").toLowerCase();
 
-        const matchesSearch = searchableText.includes(query);
-
-        return matchesStatus && matchesSearch;
+        return matchesStatus && searchable.includes(query);
     });
 
     applicationRows.innerHTML = "";
 
-    filteredApplications.forEach(application => {
-
+    filtered.forEach(application => {
         const row = document.createElement("tr");
 
         const studentCell = document.createElement("td");
-        const studentName = document.createElement("span");
-        const studentEmail = document.createElement("span");
+        const name = document.createElement("span");
+        const email = document.createElement("span");
 
-        studentName.className = "student";
-        studentName.textContent = application.name;
+        name.className = "student-name";
+        name.textContent = application.name;
 
-        studentEmail.className = "sub";
-        studentEmail.textContent = application.email;
+        email.className = "sub";
+        email.textContent = application.email;
 
-        studentCell.append(studentName, studentEmail);
+        studentCell.append(name,email);
 
-        const institutionCell = document.createElement("td");
-        institutionCell.textContent = application.institution;
+        const institution = document.createElement("td");
+        institution.textContent = application.institution;
 
-        const amountCell = document.createElement("td");
-        amountCell.textContent = "P" + Number(application.amount).toLocaleString("en-BW");
+        const amount = document.createElement("td");
+        amount.textContent =
+            "P" + Number(application.amount).toLocaleString("en-BW");
 
-        const dateCell = document.createElement("td");
-        dateCell.textContent = application.date;
+        const date = document.createElement("td");
+        date.textContent = application.date;
 
         const statusCell = document.createElement("td");
-        statusCell.textContent = application.status;
+        const badge = document.createElement("span");
+        badge.className = "status " + application.status;
+        badge.textContent = application.status;
+        statusCell.appendChild(badge);
 
-        row.append(
-            studentCell,
-            institutionCell,
-            amountCell,
-            dateCell,
-            statusCell
-        );
-
+        row.append(studentCell,institution,amount,date,statusCell);
         applicationRows.appendChild(row);
     });
 
-    const hasResults = filteredApplications.length > 0;
+    emptyState.style.display = filtered.length ? "none" : "block";
 
-    emptyState.style.display = hasResults ? "none" : "block";
-
-    if (!hasResults && applications.length > 0) {
+    if (!filtered.length && applications.length) {
         emptyTitle.textContent = "No matching applications";
         emptyDescription.textContent =
-            "Try changing your search term or selecting a different status.";
-    } else if (!hasResults) {
+            "Try changing your search term or status filter.";
+    } else if (!filtered.length) {
         emptyTitle.textContent = "No applications available";
         emptyDescription.textContent =
-            "Student applications will appear here when the secure application service is connected.";
+            "Applications will appear here when application records are connected.";
     }
 
     updateStatistics();
 }
 
-/* UPDATE STATISTICS */
-
 function updateStatistics() {
-
     document.getElementById("totalCount").textContent =
         applications.length;
 
@@ -902,31 +897,24 @@ function updateStatistics() {
         applications.filter(a => a.status === "Rejected").length;
 }
 
-/* SEARCH AND FILTER */
+searchInput.addEventListener("input",renderApplications);
+statusFilter.addEventListener("change",renderApplications);
 
-searchInput.addEventListener("input", renderApplications);
-statusFilter.addEventListener("change", renderApplications);
+/* NAVIGATION */
 
-/* SIDEBAR NAVIGATION */
-
-const navigationLinks = document.querySelectorAll("nav a");
+const navigationLinks = document.querySelectorAll(".nav a");
 
 navigationLinks.forEach(link => {
-
-    link.addEventListener("click", function () {
-
-        navigationLinks.forEach(item => {
-            item.classList.remove("active");
-        });
-
-        this.classList.add("active");
+    link.addEventListener("click",() => {
+        navigationLinks.forEach(item => item.classList.remove("active"));
+        link.classList.add("active");
     });
-
 });
 
 /* INITIALISE */
 
 renderApplications();
+verifyAdminSession();
 </script>
 
 </body>

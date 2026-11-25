@@ -73,21 +73,23 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
+
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 .requestMatchers(
                     HttpMethod.POST,
                     "/api/auth/register",
-                    "/api/auth/admin/login"
+                    "/api/auth/admin/login",
+                    "/api/auth/admin/logout"
                 ).permitAll()
 
                 .requestMatchers(
-    HttpMethod.GET,
-    "/",
-    "/api/health",
-    "/api/database-check",
-    "/api/auth/admin/session"
-).permitAll()
+                    HttpMethod.GET,
+                    "/",
+                    "/api/health",
+                    "/api/database-check",
+                    "/api/auth/admin/session"
+                ).permitAll()
 
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
